@@ -83,7 +83,7 @@
     ?>
     <script>
         function confirmDelete() {
-            return confirm("Are you sure you want to delete this flight?");
+            return confirm("Are you sure you want to delete this feedback?");
         }
     </script>
 </body>
