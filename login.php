@@ -30,7 +30,7 @@
     </div>
     <?php
         session_start();
-        if ($_SESSION['username']) {
+        if (isset($_SESSION['username'])) {
             header('Location: index.php');
         }
         require_once 'connect.php';
@@ -43,7 +43,7 @@
             if (mysqli_num_rows($result) == 1) {
                 $row = mysqli_fetch_assoc($result);
                 $_SESSION['username'] = $row['username'];
-
+                $_SESSION['user_id'] = $row['user_id'];
                 echo "<script>".
                 "alert('Đăng nhập thành công');".
                 "window.location.href='index.php';".

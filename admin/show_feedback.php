@@ -34,7 +34,7 @@
         </div>
     </div>
     <?php
-    require 'connect.php';
+    require '../connect.php';
     $limit = 5;
     $page = isset($_GET['page']) ? $_GET['page'] : 1;
     $start = ($page - 1) * $limit;
