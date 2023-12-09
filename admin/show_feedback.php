@@ -26,8 +26,8 @@
             <h1 class="text-center float-left ml-3">Show feedback</h1>
         </div>
         <div class="col-sm-6 my-auto">
-            <a href="logout.php" class="btn btn-success float-right">Logout</a>
-            <a href="create.php" class="btn btn-success float-right mr-1">
+            <a href="/web_project/logout.php" class="btn btn-success float-right">Logout</a>
+            <a href="create_feedback.php" class="btn btn-success float-right mr-1">
                 <i class="fas fa-plus"></i> Add New Feedback
             </a>
             </span>
@@ -66,8 +66,8 @@
             echo "<td>" . $row['user_id'] . "</td>";
             echo "<td>" . $row['product_id'] . "</td>";
             echo "<td>" . $row['createAt'] . "</td>";
-            echo "<td>" . "<a href='update.php?id=" . $row['feedback_id'] . "'><i class='fas fa-edit'></i></a>" .
-                "<a href='/web_project/admin/delete.php?id=" . $row['feedback_id'] . "' class='ml-1' onclick='return confirmDelete()'><i class='fas fa-trash-alt'></i></a>" .
+            echo "<td>" . "<a href='update_feedback.php?id=" . $row['feedback_id'] . "'><i class='fas fa-edit'></i></a>" .
+                "<a href='delete_feedback.php?id=" . $row['feedback_id'] . "' class='ml-1' onclick='return confirmDelete()'><i class='fas fa-trash-alt'></i></a>" .
                 "</td>";
             echo "</tr>";
         }
