@@ -18,7 +18,7 @@
             "window.location.href='../login.php';".
             "</script>";   
     }
-    require 'connect.php';
+    require '../connect.php';
     if (isset($_POST['submit'])) {
         $message = $_POST['message'];
         $user = $_POST['user'];

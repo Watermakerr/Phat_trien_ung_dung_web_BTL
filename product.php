@@ -10,6 +10,18 @@
 </head>
 
 <body>
+    <?php
+    session_start();
+    $id = $_GET['id'];
+    ?>
+    <script>
+        function checkLogin(event) {
+            <?php if (!isset($_SESSION['username'])) : ?>
+                event.preventDefault();
+                alert('Bạn phải đăng nhập');
+            <?php endif; ?>
+        }
+    </script>
     <div class="row m-0">
         <img src="" alt="Hình ảnh" class="img-thumbnail">
     </div>
@@ -17,13 +29,15 @@
         <div class="col-md-8 col-lg-6">
             <div class="card shadow-0 border bg-primary">
                 <div class="card-body p4">
-                    <div class="form-outline mb-4">
-                        <input type="text" name="message" class="form-control" placeholder="Type comment..." />
-                        <a href="#" class="btn">Add comment</a>
-                    </div>
+                    <form action="/web_project/feedback.php" method="get" onsubmit="checkLogin(event)">
+                        <input type="hidden" name="id" value="<?php echo $id; ?>">
+                        <div class="form-outline mb-4">
+                            <input type="text" name="message" class="form-control" placeholder="Type comment..." />
+                            <button class="btn bg-danger text-white mt-3">Add comment</button>
+                        </div>
+                    </form>
                     <?php
                     require_once 'connect.php';
-                    $id = $_GET['id'];
                     $sql = "SELECT `message`, `username` " .
                         "FROM feedbacks " .
                         "INNER JOIN users ON feedbacks.user_id = users.user_id " .

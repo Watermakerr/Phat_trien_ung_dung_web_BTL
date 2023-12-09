@@ -14,7 +14,7 @@
             "window.location.href='../login.php';".
             "</script>";   
     }
-    require 'connect.php';
+    require '../connect.php';
     $id = $_GET['id'];
     $sql = "DELETE FROM `feedbacks` WHERE feedback_id = $id";
     if ($conn->query($sql) === TRUE) {
