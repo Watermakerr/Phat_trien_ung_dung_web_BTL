@@ -8,8 +8,11 @@
 <body>
     <?php
     session_start();
-    if (!$_SESSION['username']) {
-        header('Location: login.php');
+    if ($_SESSION['username'] != 'admin') {
+        echo "<script>".
+            "alert('Bạn không có quyền admin');".
+            "window.location.href='../login.php';".
+            "</script>";   
     }
     require 'connect.php';
     $id = $_GET['id'];
