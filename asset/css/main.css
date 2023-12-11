@@ -1,0 +1,24 @@
+.navbar-nav li {
+  border-bottom: 1px solid transparent;
+}
+
+.navbar-nav li:hover {
+  border-bottom-color: red;
+}
+
+.nav-item .subnav {
+  display: none;
+  position: absolute;
+  min-width: 130px;
+  list-style: none;
+  /* Other styles here */
+  color: #343a40; /* Add this line */
+  background-color: gray !important; /* Add this line */
+  top: 100%;
+  
+  
+}
+
+.nav-item:hover .subnav, .subnav:hover {
+    display: block;
+}
