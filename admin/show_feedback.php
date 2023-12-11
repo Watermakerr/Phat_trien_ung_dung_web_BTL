@@ -26,7 +26,7 @@
             <h1 class="text-center float-left ml-3">Show feedback</h1>
         </div>
         <div class="col-sm-6 my-auto">
-            <a href="/web_project/logout.php" class="btn btn-success float-right">Logout</a>
+            <a href="../logout.php" class="btn btn-success float-right">Logout</a>
             <a href="create_feedback.php" class="btn btn-success float-right mr-1">
                 <i class="fas fa-plus"></i> Add New Feedback
             </a>

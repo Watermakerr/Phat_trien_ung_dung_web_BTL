@@ -7,7 +7,7 @@
     <title>Document</title>
     <!-- bootrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/web_project/asset/css/main.css">
+    <link rel="stylesheet" href="asset/css/main.css">
 </head>
 
 <body>
