@@ -11,14 +11,10 @@
   position: absolute;
   min-width: 130px;
   list-style: none;
-  /* Other styles here */
-  color: #343a40; /* Add this line */
-  background-color: gray !important; /* Add this line */
+  color: #343a40; 
+  background-color: #ccc !important; 
   top: 100%;
-  
-  
 }
-
 .nav-item:hover .subnav, .subnav:hover {
     display: block;
 }

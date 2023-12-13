@@ -8,6 +8,7 @@
     <!-- bootrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="asset/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body>
@@ -42,7 +43,7 @@
                     $sql = "SELECT `message`, `username`, `feedbacks`.`createAt` " .
                         "FROM feedbacks " .
                         "INNER JOIN users ON feedbacks.user_id = users.user_id " .
-                        "WHERE feedbacks.product_id = '$id'".
+                        "WHERE feedbacks.product_id = '$id'" .
                         "ORDER BY feedbacks.createAt DESC";
                     $result = mysqli_query($conn, $sql);
                     if (mysqli_num_rows($result) > 0) {
