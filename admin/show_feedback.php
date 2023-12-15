@@ -33,7 +33,7 @@
         <table class='table table-bordered table-striped text-center'>
             <thead class='thead-dark'>
                 <tr>
-                    <th>ID</th>
+                    <th>STT</th>
                     <th>Message</th>
                     <th>User</th>
                     <th>Product</th>
@@ -43,9 +43,10 @@
             </thead>
             <tbody>
                 <?php
+                $counter = ($page - 1) * $limit + 1;
                 while ($row = $result->fetch_assoc()) { ?>
                     <tr>
-                        <td><?php echo $row['feedback_id'] ?></td>
+                        <td><?php echo $counter ?></td>
                         <td><?php echo $row['message'] ?></td>
                         <td><?php echo $row['user_id'] ?></td>
                         <td><?php echo $row['product_id'] ?></td>
@@ -55,6 +56,7 @@
                         </td>
                     </tr>
                 <?php
+                    $counter++;
                 }
                 ?>
             </tbody>
