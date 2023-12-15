@@ -16,7 +16,8 @@
     if ($conn->query($sql) === TRUE) {
         echo "<script>window.location.href = 'product.php?id=$id'</script>";
     } else {
-        echo "<script>alert('Error')</script>";
+        echo "<script>alert('Error')</script>"
+        . "<script>window.location.href = 'product.php?id=$id'</script>";
     }
     ?>
 </body>

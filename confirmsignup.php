@@ -8,7 +8,7 @@
 <body>
 <?php
     session_start();
-    if ($_SESSION['user'] == true) {
+    if (isset($_SESSION['username'])) {
         header('Location: index.php');
     }
     require_once 'connect.php';
