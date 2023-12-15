@@ -9,10 +9,23 @@
             </li>
             <li class="nav-item d-flex align-items-center">
                 <a href="" class="nav-link">Sản phẩm</a>
-                <ul class="subnav bg-white p-0">
-                    <li class="nav-item"><a href="" class="nav-link text-dark">Danh mục</a></li>
-                    <li class="nav-item"><a href="" class="nav-link text-dark">Danh mục</a></li>
-                    <li class="nav-item"><a href="" class="nav-link text-dark">Danh mục</a></li>
+                <ul class="subnav p-0">
+                    <?php
+                    require 'connect.php';
+                    $sql = "SELECT * FROM categories where status = 'active'";
+                    $result = mysqli_query($conn, $sql);
+                    if (!$result) {
+                        die('Query Error: ' . mysqli_error($conn));
+                    }
+                    if (mysqli_num_rows($result) > 0) {
+                        while ($row = mysqli_fetch_assoc($result)) { ?>
+                            <li class="nav-item d-flex align-items-center">
+                                <a href="product.php?category_id=<?php echo $row['category_id'] ?>" class="nav-link text-dark"><?php echo $row['name'] ?></a>
+                            </li>
+                    <?php
+                        }
+                    }
+                    ?>
                 </ul>
             </li>
             <li class="nav-item d-flex align-items-center">
@@ -33,10 +46,10 @@
             <?php
             } else {
             ?>
-                <li class="nav-item">
+                <li class="nav-item d-flex align-items-center">
                     <a href="" class="nav-link"><?php echo $_SESSION['username'] ?></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item d-flex align-items-center">
                     <a href="logout.php" class="nav-link">Đăng xuất</a>
                 </li>
             <?php

@@ -48,6 +48,7 @@
             $row = mysqli_fetch_assoc($result);
             $_SESSION['username'] = $row['username'];
             $_SESSION['user_id'] = $row['user_id'];
+            $_SESSION['role_id'] = $row['role_id'];
             echo "<script>" .
                 "alert('Đăng nhập thành công');" .
                 "window.location.href='index.php';" .
