@@ -2,6 +2,9 @@
 <html lang="en">
 
 <body>
+    <?php
+    require 'connect.php';
+    ?>
     <nav class="py-0 navbar navbar-dark navbar-expand-sm d-flex justify-content-between bg-dark" style="height: 60px;">
         <ul class="navbar-nav h-100">
             <li class="nav-item d-flex align-items-center">
@@ -11,7 +14,6 @@
                 <a href="" class="nav-link">Sản phẩm</a>
                 <ul class="subnav p-0">
                     <?php
-                    require 'connect.php';
                     $sql = "SELECT * FROM categories where status = 'active'";
                     $result = mysqli_query($conn, $sql);
                     if (!$result) {
