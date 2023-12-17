@@ -41,7 +41,7 @@
         </div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             var fullname = document.querySelector('#fullname');
             var username = document.querySelector('#username');
             var email = document.querySelector('#email');
@@ -50,25 +50,35 @@
             var submitButton = document.querySelector('#submit');
 
             function checkInput() {
-                if (!fullname.value || !username.value || !password.value || !rePassword.value ||!email.value) {
+                if (!fullname.value || !username.value || !password.value || !rePassword.value || !email.value) {
                     submitButton.disabled = true;
                 } else {
                     submitButton.disabled = false;
                 }
+                const passwordAlert = document.querySelector('.password-alert');
                 if (password.value != rePassword.value) {
-                    var alert = document.querySelector('.alert');
-                    if (!alert) {
+                    if (!passwordAlert) {
                         var text = document.createElement('p');
                         text.innerHTML = "Mật khẩu không khớp";
-                        text.classList.add('alert', 'alert-danger', 'mt-2');
+                        text.classList.add('alert', 'alert-danger', 'mt-2', 'password-alert');
                         rePassword.parentNode.appendChild(text);
                     }
                     submitButton.disabled = true;
-                } else {
-                    var alert = document.querySelector('.alert');
-                    if (alert) {
-                        alert.remove();
+                } else if (passwordAlert) {
+                    passwordAlert.remove();
+                }
+
+                const usernameAlert = document.querySelector('.username-alert');
+                if (username.value.length < 5) {
+                    if (!usernameAlert) {
+                        var text = document.createElement('p');
+                        text.innerHTML = "Tên người dùng phải có ít nhất 5 ký tự";
+                        text.classList.add('alert', 'alert-danger', 'mt-2', 'username-alert');
+                        username.parentNode.appendChild(text);
                     }
+                    submitButton.disabled = true;
+                } else if (usernameAlert) {
+                    usernameAlert.remove();
                 }
             }
 
