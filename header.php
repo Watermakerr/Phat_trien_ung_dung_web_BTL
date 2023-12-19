@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="asset/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
 <body>
     <?php
     require 'connect.php';
     ?>
-    <nav class="py-0 navbar navbar-dark navbar-expand-sm d-flex justify-content-between bg-dark" style="height: 60px;">
+    <nav class="fixed-top py-0 navbar navbar-dark navbar-expand-sm d-flex justify-content-between bg-dark shadow" style="height: 60px;">
         <ul class="navbar-nav h-100">
             <li class="nav-item d-flex align-items-center">
-                <a href="index.php" class="nav-link">Trang chủ</a>
+                <a href="index.php" class="nav-link text-white">Trang chủ</a>
             </li>
             <li class="nav-item d-flex align-items-center">
-                <a href="" class="nav-link">Sản phẩm</a>
+                <a href="" class="nav-link text-white">Sản phẩm</a>
                 <ul class="subnav p-0">
                     <?php
                     $sql = "SELECT * FROM categories where status = 'active'";
@@ -31,7 +38,7 @@
                 </ul>
             </li>
             <li class="nav-item d-flex align-items-center">
-                <a href="" class="nav-link">Giỏ hàng</a>
+                <a href="viewcart.php" class="nav-link text-white">Giỏ hàng</a>
             </li>
         </ul>
         <ul class="navbar-nav h-100">
@@ -40,19 +47,19 @@
             if (!isset($_SESSION['username'])) {
             ?>
                 <li class="nav-item d-flex align-items-center">
-                    <a href="signup.php" class="nav-link">Đăng ký</a>
+                    <a href="signup.php" class="nav-link text-white">Đăng ký</a>
                 </li>
                 <li class="nav-item d-flex align-items-center">
-                    <a href="login.php" class="nav-link">Đăng nhập</a>
+                    <a href="login.php" class="nav-link text-white">Đăng nhập</a>
                 </li>
             <?php
             } else {
             ?>
                 <li class="nav-item d-flex align-items-center">
-                    <a href="" class="nav-link"><?php echo $_SESSION['username'] ?></a>
+                    <a href="" class="nav-link text-white"><?php echo $_SESSION['username'] ?></a>
                 </li>
                 <li class="nav-item d-flex align-items-center">
-                    <a href="logout.php" class="nav-link">Đăng xuất</a>
+                    <a href="logout.php" class="nav-link text-white">Đăng xuất</a>
                 </li>
             <?php
             }

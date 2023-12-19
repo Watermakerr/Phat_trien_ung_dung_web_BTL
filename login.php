@@ -42,20 +42,30 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-        $result = mysqli_query($conn, $sql);
-        if (mysqli_num_rows($result) == 1) {
-            $row = mysqli_fetch_assoc($result);
-            $_SESSION['username'] = $row['username'];
-            $_SESSION['user_id'] = $row['user_id'];
-            $_SESSION['role_id'] = $row['role_id'];
-            echo "<script>" .
-                "alert('Đăng nhập thành công');" .
-                "window.location.href='index.php';" .
-                "</script>";
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            if (password_verify($password, $row['password'])) {
+                $_SESSION['username'] = $row['username'];
+                $_SESSION['user_id'] = $row['user_id'];
+                $_SESSION['role_id'] = $row['role_id'];
+                if ($row['role_id'] == 1) {
+                    header('Location: admin/index.php');
+                } else {
+                    header('Location: index.php');
+                }
+            }
+            else {
+                echo "<script>" .
+                    "alert('Sai mật khẩu');"
+                    . "</script>";
+            }
         } else {
             echo "<script>" .
-                "alert('Sai mật khẩu hoặc tên đăng nhập');"
+                "alert('Sai tên đăng nhập');"
                 . "</script>";
         }
         // close connection
