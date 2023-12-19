@@ -3,6 +3,6 @@
 
 2. Import file sql trong thư mục database vào database vừa tạo trêe mysql
 
-3. Tài khoản admin có username = 1, pass = 1
+3. Tk admin có role = 1
 
 4. Tạo một file connect.php để kết nối với csdl, tên db là webproject
