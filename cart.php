@@ -5,35 +5,35 @@
     <?php
     include 'header.php';
     ?>
-    <div class="container " style="margin-top: 100px;">
-        <p class="text-center">Giỏ hàng</p>
-        <div class="table">
-            <table class="table text-center my-auto">
-                <tr class="bg-secondary text-light w-100" style="height: 30px;">
-                <th>STT</th>
-                <th>Hình ảnh</th>
-                <th>Tên sản phẩm</th>
-                <th>Giá</th>
-                <th>Số lượng</th>
-                <th>Thành tiền</th>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td><img src="asset/image/a31.jpg" alt="Hình ảnh" class="img-thumbnail img-order "></td>
-                    <td>Sản phẩm 1</td>
-                    <td>100.000đ</td>
-                    <td>
-                        <input type="number" name="quantity" id="quantity" class="form-control" value="1">
-                    </td>
-                    <td>100.000đ</td>
-                </tr>
-                <tr>
-                    <th colspan="4">Tổng đơn hàng</th>
-                    <th>1</th>
-                    <th>100.000đ</th>
-                </tr>
 
-            </table>
-        </div>
-    </div>
+    <?php
+    if ($_GET['action'] == 'add') {
+        $id = $_POST['id'];
+        $quantity = $_POST['quantity'];
+
+        $sql = "SELECT * FROM products WHERE product_id = '$id'";
+        $result = mysqli_query($conn, $sql);
+        $stt = 1;
+        if (mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                if (isset($_SESSION['cartItem'][$id])) {
+                    $_SESSION['cartItem'][$id]['quantity'] += $quantity;
+                } else {
+                    $_SESSION['cartItem'][$id] = array(
+                        'stt' => $stt++, 
+                        'name' => $row['name'],
+                        'price' => $row['price'],
+                        'quantity' => $quantity,
+                        'image' => 'asset/image/a31.jpg'
+                    );
+                }
+                $_SESSION['cartItem'][$id]['total'] = $row['price'] * $_SESSION['cartItem'][$id]['quantity'];
+    ?>
+
+    <?php
+            }
+        }
+    }
+    header('Location: viewcart.php')
+    ?>
 </body>

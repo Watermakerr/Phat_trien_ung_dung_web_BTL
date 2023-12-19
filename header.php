@@ -38,7 +38,7 @@
                 </ul>
             </li>
             <li class="nav-item d-flex align-items-center">
-                <a href="" class="nav-link text-white">Giỏ hàng</a>
+                <a href="viewcart.php" class="nav-link text-white">Giỏ hàng</a>
             </li>
         </ul>
         <ul class="navbar-nav h-100">
