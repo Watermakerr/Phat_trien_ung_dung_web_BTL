@@ -1,16 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <!-- bootrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="asset/css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-</head>
-
 <body>
     <?php
     include 'header.php';
@@ -20,8 +10,27 @@
         header('Location: index.php');
     }
     ?>
-    <div class="row m-0">
-        <img src="" alt="Hình ảnh" class="img-thumbnail">
+    <div>
+        <div class="container" style="margin-top: 100px;">
+            <div class="row">
+                <div class="col-lg-6">
+                    <img src="asset/image/a31.jpg" class="img-fluid" alt="">
+                </div>
+                <div class="col-lg-6">
+                    <form action="cart.php?action=add" method="post">
+                        <h1 class="font-weight-bold">Sản phẩm 1</h1>
+                        <p class="font-weight-bold">Giá: 100.000đ</p>
+                        <p class="font-weight-bold">Mô tả: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
+                        <input type="number" class="form-custom-control-inline" name="quantity">
+                        <input type="hidden" name="id" value="2">
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success"><i class="fas fa-shopping-cart"></i></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <div class="d-flex justify-content-center">
         <div class="col-md-8 col-lg-6">

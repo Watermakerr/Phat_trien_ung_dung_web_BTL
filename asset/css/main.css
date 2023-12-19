@@ -3,16 +3,32 @@
   position: absolute;
   min-width: 130px;
   list-style: none;
-  background-color: #fff !important; 
+  background-color: #fff !important;
   top: 100%;
+  z-index: 99;
 
 }
-.nav-item:hover .subnav{
-    display: block;
+.nav-item:hover .subnav {
+  display: block;
 }
-.subnav li:hover{
-    background-color: #000;
+.subnav li:hover {
+  background-color: #000;
 }
-.subnav li a:hover{
-    color: #fff !important;
+
+.subnav li:hover a {
+  color: #fff !important;
+}
+
+.subnav li a:hover {
+  color: #fff !important;
+}
+.mt-custom {
+  margin-top: 100px; /* Adjust this value as needed */
+}
+.img-order {
+  display: block;
+  max-width: 20%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
