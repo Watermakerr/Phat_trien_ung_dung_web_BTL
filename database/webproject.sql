@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 15, 2023 at 09:06 AM
+-- Generation Time: Dec 20, 2023 at 03:27 PM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -63,12 +63,7 @@ CREATE TABLE `feedbacks` (
 --
 
 INSERT INTO `feedbacks` (`feedback_id`, `message`, `user_id`, `product_id`, `create_at`, `update_at`) VALUES
-(6, '', 6, 1, '2023-12-15 07:45:56', '2023-12-15 07:45:56'),
-(7, '', 6, 1, '2023-12-15 07:45:58', '2023-12-15 07:45:58'),
-(8, '', 6, 1, '2023-12-15 07:48:00', '2023-12-15 07:48:00'),
-(9, '', 6, 1, '2023-12-15 07:48:02', '2023-12-15 07:48:02'),
-(10, '', 6, 1, '2023-12-15 07:48:03', '2023-12-15 07:48:03'),
-(13, 'sdffsdf', 5, 1, '2023-12-15 08:58:45', '2023-12-15 08:58:45');
+(1, 'Sản phẩm rất tốt, tôi khuyên không nên mua', 9, 29, '2023-12-20 15:26:44', '2023-12-20 15:26:44');
 
 -- --------------------------------------------------------
 
@@ -80,7 +75,8 @@ CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `status` int(11) NOT NULL DEFAULT '0' COMMENT '0. Đơn hàng đang tiếp nhận 1. Đóng gói 2. Đang giao 3. Giao hàng thành công 4. Hủy'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -117,7 +113,25 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `name`, `image`, `category_id`, `price`, `description`, `create_at`, `update_at`) VALUES
-(1, 'Phone', 'link', 1, 200000, 'Nothing', '2023-12-15 07:45:51', '2023-12-15 07:45:51');
+(11, 'phone 32', '5ce1c93d3ca9b4a2425d369b59d05fee.jpg', 2, 123, '111', '2023-12-20 09:39:44', '2023-12-20 09:39:44'),
+(12, 'ádasd', '359362701_665572625615117_1068142181357036148_n-1689827198-684-width1024height1024.jpg', 2, 23143, '234234', '2023-12-20 09:54:59', '2023-12-20 09:54:59'),
+(13, 'iphone 1', 'iphone-x.png', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:21:42', '2023-12-20 15:21:42'),
+(14, 'iphone 2', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:21:55', '2023-12-20 15:21:55'),
+(15, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:22:11', '2023-12-20 15:22:11'),
+(16, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:22:14', '2023-12-20 15:22:14'),
+(17, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:22:17', '2023-12-20 15:22:17'),
+(18, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:22:20', '2023-12-20 15:22:20'),
+(19, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:22:23', '2023-12-20 15:22:23'),
+(20, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:03', '2023-12-20 15:23:03'),
+(21, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:06', '2023-12-20 15:23:06'),
+(22, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:09', '2023-12-20 15:23:09'),
+(23, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:11', '2023-12-20 15:23:11'),
+(24, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:13', '2023-12-20 15:23:13'),
+(25, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:14', '2023-12-20 15:23:14'),
+(26, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:16', '2023-12-20 15:23:16'),
+(27, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:18', '2023-12-20 15:23:18'),
+(28, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:19', '2023-12-20 15:23:19'),
+(29, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:21', '2023-12-20 15:23:21');
 
 -- --------------------------------------------------------
 
@@ -161,7 +175,10 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`user_id`, `username`, `fullname`, `email`, `password`, `role_id`, `create_at`, `update_at`) VALUES
 (5, '1', 'Trần Quốc Chính', 'vuibigboy@gmail.com', '1', 1, '2023-12-15 07:34:42', '2023-12-15 07:52:09'),
-(6, 'vuibigboy', 'Trần Quốc Chính', 'vuibigboy@gmail.com', '1', 2, '2023-12-15 07:35:17', '2023-12-15 07:35:17');
+(6, 'vuibigboy', 'Trần Quốc Chính', 'vuibigboy@gmail.com', '1', 2, '2023-12-15 07:35:17', '2023-12-15 07:35:17'),
+(7, 'aa', 'Trần Quốc Chính', 'vuibigboy@gmail.com', '1', 2, '2023-12-15 09:10:02', '2023-12-15 09:10:02'),
+(8, '2', '1', 'vuibigboy@gmail.com', '1', 2, '2023-12-15 13:10:34', '2023-12-15 13:10:34'),
+(9, 'chinh', 'Trần Quốc Chính', 'vuibigboy@gmail.com', '$2y$10$DnB0aKlajFKc7DNPlZV3n.jqBpjdU5o.WFol2kZPIHFmPj6t9ZyBW', 1, '2023-12-16 10:07:31', '2023-12-20 08:23:39');
 
 --
 -- Indexes for dumped tables
@@ -229,7 +246,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `feedbacks`
 --
 ALTER TABLE `feedbacks`
-  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `orders`
@@ -241,7 +258,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -253,7 +270,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
