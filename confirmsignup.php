@@ -8,14 +8,14 @@
 <body>
 <?php
     session_start();
-    if ($_SESSION['user'] == true) {
+    if (isset($_SESSION['username'])) {
         header('Location: index.php');
     }
     require_once 'connect.php';
     if (isset($_POST['submit'])) {
         $fullname = $_POST['fullname'];
         $username = $_POST['username'];
-        $password = $_POST['password'];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
         $email = $_POST['email'];
         $sql = "INSERT INTO users (`fullname`, `username`, `email`, `password`) VALUES ('$fullname', '$username', '$email', '$password')";
         $result = mysqli_query($conn, $sql);

@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="asset/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
+
 <body>
-<div class="container">
+    <div class="container">
         <div class="row">
             <div class="col-6 mx-auto my-5">
                 <form action="" method="POST">
@@ -25,37 +29,49 @@
                 </form>
                 <p class="text-center">Bạn chưa có tài khoản? <a href="signup.php">Đăng ký</a></p>
             </div>
-            </div>   
         </div>
     </div>
+    </div>
     <?php
-        session_start();
-        if ($_SESSION['username']) {
-            header('Location: index.php');
-        }
-        require_once 'connect.php';
-        if (isset($_POST['submit'])) {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-        
-            $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-            $result = mysqli_query($conn, $sql);
-            if (mysqli_num_rows($result) == 1) {
-                $row = mysqli_fetch_assoc($result);
-                $_SESSION['username'] = $row['username'];
+    session_start();
+    if (isset($_SESSION['username'])) {
+        header('Location: index.php');
+    }
+    require_once 'connect.php';
+    if (isset($_POST['submit'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
 
-                echo "<script>".
-                "alert('Đăng nhập thành công');".
-                "window.location.href='index.php';".
-                "</script>";   
-            } else {
-                echo "<script>".
-                    "alert('Sai mật khẩu hoặc tên đăng nhập');"
-                    ."</script>";  
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows == 1) {
+            $row = $result->fetch_assoc();
+            if (password_verify($password, $row['password'])) {
+                $_SESSION['username'] = $row['username'];
+                $_SESSION['user_id'] = $row['user_id'];
+                $_SESSION['role_id'] = $row['role_id'];
+                if ($row['role_id'] == 1) {
+                    header('Location: admin/index.php');
+                } else {
+                    header('Location: index.php');
+                }
             }
-            // close connection
-            mysqli_close($conn);
+            else {
+                echo "<script>" .
+                    "alert('Sai mật khẩu');"
+                    . "</script>";
+            }
+        } else {
+            echo "<script>" .
+                "alert('Sai tên đăng nhập');"
+                . "</script>";
         }
+        // close connection
+        mysqli_close($conn);
+    }
     ?>
 </body>
+
 </html>

@@ -1,20 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
 </head>
 <body>
     <?php
-    session_start();
-    if ($_SESSION['username'] != 'admin') {
-        echo "<script>".
-            "alert('Bạn không có quyền admin');".
-            "window.location.href='../login.php';".
-            "</script>";   
-    }
-    require 'connect.php';
+    require 'header.php';
     $id = $_GET['id'];
     $sql = "DELETE FROM `feedbacks` WHERE feedback_id = $id";
     if ($conn->query($sql) === TRUE) {
