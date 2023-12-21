@@ -2,7 +2,7 @@
 <html lang="en">
 <body>
     <?php
-    require 'header.php';
+    require_once 'header.php';
     if (isset($_POST['submit'])) {
         $message = $_POST['message'];
         $user = $_POST['user'];

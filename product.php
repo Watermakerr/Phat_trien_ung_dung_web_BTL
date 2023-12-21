@@ -6,25 +6,32 @@
     include 'header.php';
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
-    } else {
-        header('Location: index.php');
+        $sql = "SELECT * FROM `products` WHERE `product_id` = '$id'";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+        } else {
+            header('Location: index.php');
+        }
     }
     ?>
     <div>
         <div class="container" style="margin-top: 100px;">
             <div class="row">
                 <div class="col-lg-6">
-                    <img src="asset/image/a31.jpg" class="img-fluid" alt="">
+                    <img src="asset/image/<?php echo $row['image']?>" class="img-fluid" alt="">
                 </div>
                 <div class="col-lg-6">
                     <form action="cart.php?action=add" method="post">
-                        <h1 class="font-weight-bold">Sản phẩm 1</h1>
-                        <p class="font-weight-bold">Giá: 100.000đ</p>
-                        <p class="font-weight-bold">Mô tả: Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
-                        <input type="number" class="form-custom-control-inline" name="quantity">
-                        <input type="hidden" name="id" value="2">
-
-                        <div class="text-center">
+                        <h1 class="font-weight-bold"><?php echo $row['name'] ?></h1>
+                        <p> Giá: <?php echo number_format($row['price'], 0, '', ',') ?> đ</p>
+                        <p>Mô tả: <?php echo $row['description'] ?></p>
+                        <div class="form-group">
+                        <label for="quantity">Số lượng</label>
+                        <input type="number" class="form-control" name="quantity">
+                        </div>
+                        <input type="hidden" name="id" value="<?php echo $row['product_id'] ?>">
+                        <div class="mt-5">
                             <button type="submit" class="btn btn-success"><i class="fas fa-shopping-cart"></i></button>
                         </div>
                     </form>

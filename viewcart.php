@@ -10,6 +10,10 @@
 <body>
     <?php
     require_once 'header.php';
+    if ($_GET['action'] == 'delete') {
+        $id = $_GET['id'];
+        unset($_SESSION['cartItem'][$id]);
+    }
 
     ?>
     <div class="container " style="margin-top: 100px;">
@@ -23,6 +27,7 @@
                     <th>Giá</th>
                     <th>Số lượng</th>
                     <th>Thành tiền</th>
+                    <th>Hành động</th>
                 </tr>
                 <?php
                 $total = 0;
@@ -34,9 +39,12 @@
                         <td><?php echo $stt++; ?></td>
                         <td><img src="<?php echo $item['image']; ?>" alt="" style="width: 100px;"></td>
                         <td><?php echo $item['name']; ?></td>
-                        <td><?php echo $item['price']; ?></td>
+                        <td><?php echo number_format($item['price']); ?></td>
                         <td><?php echo $item['quantity']; ?></td>
-                        <td><?php echo isset($item['total']) ? $item['total'] : 0; ?></td>
+                        <td><?php echo isset($item['total']) ? number_format($item['total']) : 0; ?></td>
+                        <td>
+                            <a href='?action=delete&id=<?php echo $item['id'] ?>' class='ml-1' onclick='return confirmDelete()'><i class='fas fa-trash-alt'></i></a>
+                        </td>
                     </tr>
                 <?php
                 }
@@ -44,7 +52,6 @@
                 <tr>
                     <td colspan="5">Tổng tiền</td>
                     <td><?php echo number_format($total) ?>đ</td>
-                    echo 
                 </tr>
             </table>
         </div>

@@ -20,11 +20,12 @@
                     $_SESSION['cartItem'][$id]['quantity'] += $quantity;
                 } else {
                     $_SESSION['cartItem'][$id] = array(
+                        'id' => $id,
                         'stt' => $stt++, 
                         'name' => $row['name'],
                         'price' => $row['price'],
                         'quantity' => $quantity,
-                        'image' => 'asset/image/a31.jpg'
+                        'image' => 'asset/image/' . $row['image'],
                     );
                 }
                 $_SESSION['cartItem'][$id]['total'] = $row['price'] * $_SESSION['cartItem'][$id]['quantity'];
