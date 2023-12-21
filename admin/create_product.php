@@ -12,20 +12,17 @@ if (isset($_POST['submit'])) {
     if ($name == "" || $category_id == "" || $price == "" || $description == "") {
         $error[] = "Thông tin đang bỏ trống";
     }
-    if (count($error) == 0) {
-        if (isset($_FILES['image'])) {
-            $file = $_FILES['image'];
-            $file_name = $file['name'];
-            if ($file['type'] == 'image/png' || $file['type'] == 'image/jpg' || $file['type'] == 'image/jpeg' || $file['type'] == 'image/webp') {
-                $image = $file['name'];
-            } else {
-                echo "<script>
-                    alert('Lối địng dạng file ảnh')
-                    window.location.href = 'create_product.php'
-                </script>";
-                exit();
-            }
+    // check if file image is valid, if not error = "Lỗi định dạng file ảnh"
+    if (isset($_FILES['image'])) {
+        $file = $_FILES['image'];
+        $file_name = $file['name'];
+        if ($file['type'] == 'image/png' || $file['type'] == 'image/jpg' || $file['type'] == 'image/jpeg' || $file['type'] == 'image/webp') {
+            $image = $file['name'];
+        } else {
+            $error[] = "Lỗi định dạng file ảnh";
         }
+    }
+    if (count($error) == 0) {
         $sql = "INSERT INTO `products`(`name`, `category_id`, `price`,`description`, `image`) VALUES ('$name','$category_id','$price','$description','$image')";
         if ($conn->query($sql) === TRUE) {
             echo "<script>alert('Data added succesfully')</script>";
