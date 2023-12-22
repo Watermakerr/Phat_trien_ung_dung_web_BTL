@@ -19,16 +19,16 @@
         <div class="container" style="margin-top: 100px;">
             <div class="row">
                 <div class="col-lg-6">
-                    <img src="asset/image/<?php echo $row['image']?>" class="img-fluid" alt="">
+                    <img src="asset/image/<?php echo $row['image'] ?>" class="img-fluid" alt="">
                 </div>
                 <div class="col-lg-6">
-                    <form action="cart.php?action=add" method="post">
+                    <form action="cart.php?action=add" method="post" onsubmit="return checkQuantity()">
                         <h1 class="font-weight-bold"><?php echo $row['name'] ?></h1>
                         <p> Giá: <?php echo number_format($row['price'], 0, '', ',') ?> đ</p>
                         <p>Mô tả: <?php echo $row['description'] ?></p>
                         <div class="form-group">
-                        <label for="quantity">Số lượng</label>
-                        <input type="number" class="form-control" name="quantity">
+                            <label for="quantity">Số lượng</label>
+                            <input type="number" class="form-control" name="quantity" id="quantity">
                         </div>
                         <input type="hidden" name="id" value="<?php echo $row['product_id'] ?>">
                         <div class="mt-5">
@@ -92,6 +92,15 @@
                 event.preventDefault(); // Prevent the form from submitting
             }
         });
+
+        function checkQuantity() {
+            var quantity = document.querySelector('#quantity').value;
+            if (quantity < 1) {
+                alert('Số lượng phải lớn hơn 0');
+                return false;
+            }
+            return true;
+        }
     </script>
 </body>
 

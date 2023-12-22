@@ -54,8 +54,19 @@
                     <td><?php echo number_format($total) ?>đ</td>
                 </tr>
             </table>
+            <div class="text-center">
+                <a href="index.php" class="btn btn-primary">Tiếp tục mua hàng</a>
+                <a href="checkout.php" class="btn btn-success" onclick="checkLogin(event)">Thanh toán</a>
         </div>
     </div>
+    <script>
+        function checkLogin(event) {
+            <?php if (!isset($_SESSION['username'])) : ?>
+                event.preventDefault();
+                alert('Bạn phải đăng nhập');
+            <?php endif; ?>
+        }
+    </script>
 </body>
 
 </html>

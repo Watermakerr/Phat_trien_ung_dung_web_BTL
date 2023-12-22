@@ -5,7 +5,14 @@
     <?php
     include 'header.php';
     ?>
+    <!-- title for newest -->
     <div class="container" style="margin-top: 100px;">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-center text-danger">Sản phẩm mới nhất</h2>
+            </div>
+        </div>
+    <div class="container" style="margin-top: 40px;">
         <div class="row">
             <?php
             $result = mysqli_query($conn, $sql);
