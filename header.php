@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +8,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="asset/css/main.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="asset/js/app.js"></script>
+    <script src="asset\js\app.js"></script>
 </head>
+
 <body>
     <?php
     require 'connect.php';
@@ -19,7 +21,7 @@
                 <a href="index.php" class="nav-link text-white">Trang chủ</a>
             </li>
             <li class="nav-item d-flex align-items-center">
-                <a href="" class="nav-link text-white">Sản phẩm</a>
+                <a href="" class="nav-link text-white pointer-default">Danh mục</a>
                 <ul class="subnav p-0">
                     <?php
                     $sql = "SELECT * FROM categories where status = 'active'";
@@ -57,11 +59,17 @@
             } else {
             ?>
                 <li class="nav-item d-flex align-items-center">
-                    <a href="" class="nav-link text-white"><?php echo $_SESSION['username'] ?></a>
+                    <a href="" class="nav-link text-white pointer-default"><?php echo $_SESSION['username'] ?></a>
+                    <ul class="subnav p-0">
+                        <li class="nav-item d-flex align-items-center">
+                            <a href="order.php" class="nav-link text-dark">Đơn hàng</a>
+                        </li>
+                        <li class="nav-item d-flex align-items-center">
+                            <a href="logout.php" class="nav-link text-dark" onclick="return confirmLogout()">Đăng xuất</a>
+                        </li>
+                    </ul>
                 </li>
-                <li class="nav-item d-flex align-items-center">
-                    <a href="logout.php" class="nav-link text-white">Đăng xuất</a>
-                </li>
+
             <?php
             }
             ?>
