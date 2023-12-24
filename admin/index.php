@@ -12,7 +12,16 @@ require 'header.php';
 			  	</thead>
 			  <tbody>
 			    <tr>
-			      <th scope="row"><a href="show_feedback.php" style="color: #d75335;text-decoration: none;"><i class="fas fa-eye"></i> Quản lý bình luận</a></th>
+			      <th scope="row"><a href="show_feedback.php" style="color: #d75335;text-decoration: none;"><i class="fas fa-eye"></i> Quản lý bình luận</a></th><br>
+			    </tr>
+				<tr>
+			      <th scope="row"><a href="show_product.php" style="color: #d75335;text-decoration: none;"><i class="fas fa-eye"></i> Quản lý sản phẩm</a></th><br>
+			    </tr>
+				<tr>
+			      <th scope="row"><a href="show_order.php" style="color: #d75335;text-decoration: none;"><i class="fas fa-eye"></i> Quản lý đơn hàng</a></th><br>
+			    </tr>
+				<tr>
+			      <th scope="row"><a href="show_user.php" style="color: #d75335;text-decoration: none;"><i class="fas fa-eye"></i> Quản lý người dùng</a></th><br>
 			    </tr>
 			  </tbody>
 			</table>
