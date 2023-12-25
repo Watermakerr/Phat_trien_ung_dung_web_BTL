@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<body>
-    <?php
+ <?php
     include 'header.php';
     ?>
     <!-- title for newest -->
@@ -30,7 +26,7 @@
                 while ($row = $result->fetch_assoc()) { ?>
                     <div class="col-lg-3 col-md-6 mb-4">
                         <div class="card mx-auto" style="width: 12rem;">
-                            <img class="card-img-top" src="asset/image/<?php echo $row['image']?>" alt="Card image cap">
+                            <img class="card-img-top card mx-auto border-0" src="asset/image/<?php echo $row['image']?>" alt="Card image cap" style="width: 10rem; height: 10rem;">
                             <div class="card-body">
                                 <h5 class="card-title text-center">
                                     <a href="product.php?id=<?php echo $row['product_id'] ?>" class="card-link"><?php echo $row['name'] ?></a>
@@ -49,6 +45,6 @@
         echo "<li class='page-item'><a class='page-link' href='?page=" . $i . "'>" . $i . "</a></li>";
     }
     ?>
-</body>
-
-</html>
+<?php
+    include 'footer.php';
+?>

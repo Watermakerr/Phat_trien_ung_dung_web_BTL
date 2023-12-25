@@ -1,3 +1,11 @@
+.default-nav > li:hover {
+  background-color: #000;
+}
+
+.default-nav > li:hover > a {
+  color: #fff !important;
+}
+
 .nav-item .subnav {
   display: none;
   position: absolute;
@@ -35,4 +43,10 @@
 
 .pointer-default {
   cursor:default ;
+}
+.wrapper {
+  display: flex;
+  width: 100%;
+  align-items: stretch;
+  overflow-x: hidden;
 }
