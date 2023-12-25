@@ -4,6 +4,28 @@
 <body>
     <?php
     require 'header.php';
+    if ($_GET['action'] == 'delete'){
+        if (isset($_POST['checkbox'])) {
+            $ids = $_POST['checkbox'];
+            if (!empty($ids)) {
+                $ids = implode(',', array_map('intval', $ids)); // Sanitize the ids
+                $sql = "DELETE FROM `products` WHERE product_id IN ($ids)";
+                if ($conn->query($sql) !== TRUE) {
+                    echo "<script>alert('Không thể xóa sản phầm này')</script>";  
+                }
+                else{
+                    header("Location: show_product.php");
+                }
+            }
+        }
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $sql = "DELETE FROM `products` WHERE product_id = $id";
+            if ($conn->query($sql) !== TRUE) {
+                echo "<script>alert('Không thể xóa sản phầm này')</script>";  
+            }
+        }
+    }
     ?>
     <div class="row bg-dark mr-0 py-1">
         <div class="col-sm-6">
@@ -30,7 +52,7 @@
     $total_pages = ceil($total_row['total'] / $limit);
 
     if ($result->num_rows > 0) { ?>
-        <form action="delete_product.php" method="post">
+        <form action="?action=delete" method="post">
             <table class='table table-bordered table-striped text-center'>
                 <thead class='thead-dark'>
                     <tr>
@@ -55,7 +77,7 @@
                             <td><?php echo $row['catName'] ?></td>
                             <td><?php echo $row['price'] ?></td>
                             <td><?php echo $row['description'] ?></td>
-                            <td><a href='delete_product.php?id= <?php echo $row['product_id'] ?>' class='ml-1' onclick='return confirmDelete()'><i class='fas fa-trash-alt'></i></a>
+                            <td><a href='?action=delete&id=<?php echo $row['product_id'] ?>' class='ml-1' onclick='return confirmDelete()'><i class='fas fa-trash-alt'></i></a>
                             </td>
                         </tr>
                     <?php
@@ -64,7 +86,7 @@
                     ?>
                 </tbody>
             </table>
-            <input type="submit" name="delete" value="Delete Selected">
+            <input type="submit" name="delete" value="Delete Selected" onclick="return confirmDelete()">
         </form>
     <?php
     } else {
