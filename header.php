@@ -15,13 +15,13 @@
     <?php
     require 'connect.php';
     ?>
-    <nav class="fixed-top py-0 navbar navbar-dark navbar-expand-sm d-flex justify-content-between bg-dark shadow" style="height: 60px;">
-        <ul class="navbar-nav h-100">
+    <nav class="fixed-top py-0 navbar navbar-expand-sm d-flex justify-content-between bg-danger shadow" style="height: 60px;">
+        <ul class="navbar-nav h-100 default-nav">
             <li class="nav-item d-flex align-items-center">
                 <a href="index.php" class="nav-link text-white">Trang chủ</a>
             </li>
             <li class="nav-item d-flex align-items-center">
-                <a href="" class="nav-link text-white pointer-default">Danh mục</a>
+                <a href="" class="nav-link text-white" onclick="return false">Danh mục</a>
                 <ul class="subnav p-0">
                     <?php
                     $sql = "SELECT * FROM categories where status = 'active'";
@@ -81,6 +81,10 @@
             </form>
         </ul>
     </nav>
-</body>
-
-</html>
+    <div class="container-fluid px-0" style="margin-top: 60px;">
+        <div class="row">
+            <div class="col-12">
+                <img src="asset\image\tuan-le-infinix-2023-sliding.webp" alt="" class="img-fluid w-100">
+            </div>
+        </div>
+    </div>
