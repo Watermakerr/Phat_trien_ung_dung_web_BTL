@@ -49,6 +49,7 @@ if ($_GET['action'] == 'delete') {
             <a href="checkout.php" class="btn btn-success" onclick="checkLogin(event)">Thanh toán</a>
         </div>
     </div>
+</div>
     <script>
         function checkLogin(event) {
             <?php if (!isset($_SESSION['username'])) : ?>
