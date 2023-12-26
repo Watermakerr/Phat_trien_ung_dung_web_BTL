@@ -32,7 +32,7 @@
                     if (mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_assoc($result)) { ?>
                             <li class="nav-item d-flex align-items-center">
-                                <a href="product.php?category_id=<?php echo $row['category_id'] ?>" class="nav-link text-dark"><?php echo $row['name'] ?></a>
+                                <a href="?category=<?php echo $row['category_id'] ?>" class="nav-link text-dark"><?php echo $row['name'] ?></a>
                             </li>
                     <?php
                         }
@@ -73,8 +73,8 @@
             <?php
             }
             ?>
-            <form class="form-inline" action="product.php" method="get">
-                <input class="form-control mr-sm-2 rounded-pill" type="search" placeholder="Search" name="name">
+            <form class="form-inline" action="" method="get">
+                <input class="form-control mr-sm-2 rounded-pill" type="search" placeholder="Search" name="keyword">
                 <button class="btn btn-outline-success my-2 my-sm-0 rounded-pill" type="submit">
                     <i class="fas fa-search"></i>
                 </button>
