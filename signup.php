@@ -25,14 +25,16 @@
         $result = $stmt->get_result();
         if ($result->num_rows == 0) {
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-            $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
-            $stmt->bind_param("ss", $username, $hashedPassword);
+            $fullname = $_POST['fullname'];
+            $email = $_POST['email'];
+
+            $stmt = $conn->prepare("INSERT INTO users (username, password, fullname, email) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("ssss", $username, $hashedPassword, $fullname, $email);
             $stmt->execute();
 
-            $_SESSION['username'] = $username;
             echo "<script>" .
                 "alert('Đăng ký thành công');" .
-                "window.location.href='index.php';" .
+                "window.location.href='login.php';" .
                 "</script>";
         } else {
             $error = "Tên đăng nhập đã tồn tại";
