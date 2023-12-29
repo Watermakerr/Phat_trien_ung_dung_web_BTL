@@ -10,10 +10,44 @@
 </head>
 
 <body>
+    <?php
+    require 'header.php';
+    if (isset($_SESSION['username'])) {
+        header('Location: index.php');
+    }
+    if (isset($_POST['submit'])) {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows == 0) {
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
+            $stmt->bind_param("ss", $username, $hashedPassword);
+            $stmt->execute();
+
+            $_SESSION['username'] = $username;
+            echo "<script>" .
+                "alert('Đăng ký thành công');" .
+                "window.location.href='index.php';" .
+                "</script>";
+        } else {
+            $error = "Tên đăng nhập đã tồn tại";
+        }
+    }
+    ?>
     <div class="container">
         <div class="row">
             <div class="col-6 mx-auto my-5">
-                <form action="confirmsignup.php" method="POST">
+                <form action="" method="POST">
+                    <?php
+                    if (isset($error)) {
+                        echo "<div class='alert alert-danger'>$error</div>";
+                    }
+                    ?>
                     <h2 class="text-center">Trang đăng ký</h2>
                     <div class="form-group">
                         <label for="name">Họ và tên</label>

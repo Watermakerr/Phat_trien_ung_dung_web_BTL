@@ -12,32 +12,11 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-6 mx-auto my-5">
-                <form action="" method="POST">
-                    <h2 class="text-center">Trang đăng nhập</h2>
-                    <div class="form-group">
-                        <label for="username">Tên đăng nhập</label>
-                        <input type="username" name="username" id="username" class="form-control">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="password">Mật khẩu</label>
-                        <input type="password" name="password" id="password" class="form-control">
-                    </div>
-                    <input name="submit" type="submit" class="btn btn-primary form-control" id="submit" value="Đăng nhập"></input>
-                </form>
-                <p class="text-center">Bạn chưa có tài khoản? <a href="signup.php">Đăng ký</a></p>
-            </div>
-        </div>
-    </div>
-    </div>
     <?php
-    session_start();
+    require 'header.php';
     if (isset($_SESSION['username'])) {
         header('Location: index.php');
     }
-    require_once 'connect.php';
     if (isset($_POST['submit'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -57,21 +36,41 @@
                 } else {
                     header('Location: index.php');
                 }
-            }
-            else {
-                echo "<script>" .
-                    "alert('Sai mật khẩu');"
-                    . "</script>";
+            } else {
+                $error = "Sai mật khẩu";
             }
         } else {
-            echo "<script>" .
-                "alert('Sai tên đăng nhập');"
-                . "</script>";
+            $error = "Sai tên đăng nhập";
         }
         // close connection
         mysqli_close($conn);
     }
     ?>
+    <div class="container">
+        <div class="row">
+            <div class="col-6 mx-auto my-5">
+                <form action="" method="POST">
+                    <?php
+                    if (isset($error)) {
+                        echo "<div class='alert alert-danger'>$error</div>";
+                    }
+                    ?>
+                    <h2 class="text-center">Trang đăng nhập</h2>
+                    <div class="form-group">
+                        <label for="username">Tên đăng nhập</label>
+                        <input type="username" name="username" id="username" class="form-control">
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="password">Mật khẩu</label>
+                        <input type="password" name="password" id="password" class="form-control">
+                    </div>
+                    <input name="submit" type="submit" class="btn btn-primary form-control" id="submit" value="Đăng nhập"></input>
+                </form>
+                <p class="text-center">Bạn chưa có tài khoản? <a href="signup.php">Đăng ký</a></p>
+            </div>
+        </div>
+    </div>
+    </div>
 </body>
 
 </html>

@@ -65,6 +65,8 @@
                             <a href="order.php" class="nav-link text-dark">Đơn hàng</a>
                         </li>
                         <li class="nav-item d-flex align-items-center">
+                            <a href="change_pass.php" class="nav-link text-dark">Đổi mật khẩu</a>
+                        <li class="nav-item d-flex align-items-center">
                             <a href="logout.php" class="nav-link text-dark" onclick="return confirmLogout()">Đăng xuất</a>
                         </li>
                     </ul>
