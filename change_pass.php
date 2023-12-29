@@ -5,24 +5,21 @@ if (!isset($_SESSION['username'])) {
 };
 if (isset($_POST['submit'])) {
     $currentPassword = $_POST['currentPassword'];
-    $newPassword = $_POST['newPassword'];
-    $confirmPassword = $_POST['confirmPassword'];
-
-    if ($newPassword == $confirmPassword) {
-        // Replace 'your_database_connection' with your actual database connection variable
-        $sql = "UPDATE users SET password='$newPassword' WHERE password='$currentPassword'";
-        $result = mysqli_query($conn, $sql);
-        if (!$result) {
-            die('Query Error: ' . mysqli_error($conn));
-        }
-        if (mysqli_affected_rows($conn) > 0) {
-            echo "<script>" .
-                "alert('Đổi mật khẩu thành công');".
-                "window.location.href='index.php';".
-                "</script>";
-        } else {
-            $error = "Mât khẩu hiện tại không đúng";
-        }
+    $stmt = $conn->prepare("SELECT password FROM users WHERE username = ?");
+    $stmt->bind_param("s", $_SESSION['username']);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $hashedPassword = $row['password'];
+    if (password_verify($currentPassword, $hashedPassword)) {
+        $newPassword = $_POST['newPassword'];
+        $hashedNewPassword = password_hash($newPassword, PASSWORD_DEFAULT);
+        $stmt = $conn->prepare("UPDATE users SET password = ? WHERE username = ?");
+        $stmt->bind_param("ss", $hashedNewPassword, $_SESSION['username']);
+        $stmt->execute();
+        echo "<script>alert('Đổi mật khẩu thành công'); window.location.href = 'index.php';</script>";
+    } else {
+        $error = "Sai mật khẩu";
     }
 }
 ?>

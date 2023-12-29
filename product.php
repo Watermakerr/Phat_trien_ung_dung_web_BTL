@@ -35,11 +35,11 @@ if (isset($_GET['id'])) {
         </div>
     </div>
 </div>
-<div class="d-flex justify-content-center">
+<div class="d-flex justify-content-center my-5">
     <div class="col-md-8 col-lg-6">
         <div class="card shadow-0 border bg-primary">
             <div class="card-body p4">
-                <form action="feedback.php" method="get" onsubmit="checkLogin(event)">
+                <form action="feedback.php" method="post" onsubmit="checkLogin(event)">
                     <input type="hidden" name="id" value="<?php echo $id; ?>">
                     <div class="form-outline mb-4">
                         <input type="text" name="message" class="form-control" placeholder="Type comment..." />
@@ -66,7 +66,7 @@ if (isset($_GET['id'])) {
                 <?php
                     }
                 } else {
-                    echo "0 results";
+                    echo "Chưa có bình luận nào";
                 }
                 ?>
             </div>
