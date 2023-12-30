@@ -7,6 +7,9 @@ if (!isset($_SESSION['cartItem'])) { ?>
         alert('Giỏ hàng trống');
         window.location.href = 'index.php';
     </script>
+    <?php
+    die();
+?>
 <?php
 }
 $sql = "INSERT INTO `orders`(`user_id`) VALUES ('" . $_SESSION['user_id'] . "')";

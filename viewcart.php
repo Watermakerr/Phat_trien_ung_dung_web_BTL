@@ -3,6 +3,10 @@ require_once 'header.php';
 if ($_GET['action'] == 'delete') {
     $id = $_GET['id'];
     unset($_SESSION['cartItem'][$id]);
+
+    if (empty($_SESSION['cartItem'])) {
+        unset($_SESSION['cartItem']);
+    }
 }
 
 ?>
