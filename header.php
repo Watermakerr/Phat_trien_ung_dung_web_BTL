@@ -75,7 +75,7 @@
             <?php
             }
             ?>
-            <form class="form-inline" action="" method="get">
+            <form class="form-inline" action="index.php" method="get">
                 <input class="form-control mr-sm-2 rounded-pill" type="search" placeholder="Search" name="keyword">
                 <button class="btn btn-outline-success my-2 my-sm-0 rounded-pill" type="submit">
                     <i class="fas fa-search"></i>
