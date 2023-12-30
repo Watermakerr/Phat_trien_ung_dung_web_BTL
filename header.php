@@ -32,7 +32,7 @@
                     if (mysqli_num_rows($result) > 0) {
                         while ($row = mysqli_fetch_assoc($result)) { ?>
                             <li class="nav-item d-flex align-items-center">
-                                <a href="?category=<?php echo $row['category_id'] ?>" class="nav-link text-dark"><?php echo $row['name'] ?></a>
+                                <a href="index.php?category=<?php echo $row['category_id'] ?>" class="nav-link text-dark"><?php echo $row['name'] ?></a>
                             </li>
                     <?php
                         }
