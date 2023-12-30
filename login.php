@@ -68,7 +68,6 @@
                 "alert('Sai tên đăng nhập');"
                 . "</script>";
         }
-        // close connection
         mysqli_close($conn);
     }
     ?>

@@ -67,7 +67,6 @@
                 } else if (passwordAlert) {
                     passwordAlert.remove();
                 }
-
                 const usernameAlert = document.querySelector('.username-alert');
                 if (username.value.length < 5) {
                     if (!usernameAlert) {
@@ -81,14 +80,11 @@
                     usernameAlert.remove();
                 }
             }
-
             fullname.addEventListener('input', checkInput);
             username.addEventListener('input', checkInput);
             email.addEventListener('input', checkInput);
             password.addEventListener('input', checkInput);
             rePassword.addEventListener('input', checkInput);
-
-            // Initial check in case the form is autofilled
             checkInput();
         })
     </script>
