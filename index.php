@@ -66,7 +66,8 @@ $total_pages = ceil($total_row['total'] / $limit);
                         <img class="card-img-top card mx-auto border-0" src="asset/image/<?php echo $row['image'] ?>" alt="Card image cap" style="width: 10rem; height: 10rem;">
                         <div class="card-body">
                             <h5 class="card-title text-center">
-                            <a href="product.php?id=<?php echo $row['product_id']; ?>" class="card-link"><?php echo $row['name']; ?></a>                            </h5>
+                                <a href="product.php?id=<?php echo $row['product_id']; ?>" class="card-link"><?php echo $row['name']; ?></a>
+                            </h5>
                             <p class="card-text text-center"><?php echo number_format($row['price'], 0, '', ',') ?> đ</p>
                         </div>
                     </div>
@@ -79,8 +80,14 @@ $total_pages = ceil($total_row['total'] / $limit);
 <div class="container">
     <ul class='pagination justify-content-center'>
         <?php
+        $url = '?';
+        if (isset($_GET['category'])) {
+            $url .= 'category=' . $_GET['category'] . '&';
+        } elseif (isset($_GET['keyword'])) {
+            $url .= 'keyword=' . $_GET['keyword'] . '&';
+        }
         for ($i = 1; $i <= $total_pages; $i++) {
-            echo "<li class='page-item'><a class='page-link' href='?page=" . $i . "'>" . $i . "</a></li>";
+            echo "<li class='page-item'><a class='page-link' href='" . $url . "page=" . $i . "'>" . $i . "</a></li>";
         }
         ?>
     </ul>
