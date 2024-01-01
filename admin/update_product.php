@@ -27,11 +27,10 @@
                 <div class="form-group mt-3">
                     <label for="category">Danh mục</label><br>
                     <select name="category_id" id="category_id" class="form-select w-100">
-
                         <?php
                         if (mysqli_num_rows($result_1) > 0) {
                             while ($row_1 = mysqli_fetch_assoc($result_1)) { ?>
-                                <option selected value="<?php echo $row['category_id'] ?>"><?php echo $row_1['name'] ?></option>
+                                <option value="<?php echo $row_1['category_id'] ?>"><?php echo $row_1['name'] ?></option>
 
                         <?php
                             }
