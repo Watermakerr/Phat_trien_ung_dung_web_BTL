@@ -4,16 +4,15 @@
 <body>
     <?php
     require 'header.php';
-    if ($_GET['action'] == 'delete'){
+    if ($_GET['action'] == 'delete') {
         if (isset($_POST['checkbox'])) {
             $ids = $_POST['checkbox'];
             if (!empty($ids)) {
                 $ids = implode(',', array_map('intval', $ids)); // Sanitize the ids
                 $sql = "DELETE FROM `products` WHERE product_id IN ($ids)";
                 if ($conn->query($sql) !== TRUE) {
-                    echo "<script>alert('Không thể xóa sản phầm này')</script>";  
-                }
-                else{
+                    echo "<script>alert('Không thể xóa sản phầm này')</script>";
+                } else {
                     header("Location: show_product.php");
                 }
             }
@@ -22,7 +21,7 @@
             $id = $_GET['id'];
             $sql = "DELETE FROM `products` WHERE product_id = $id";
             if ($conn->query($sql) !== TRUE) {
-                echo "<script>alert('Không thể xóa sản phầm này')</script>";  
+                echo "<script>alert('Không thể xóa sản phầm này')</script>";
             }
         }
     }
@@ -39,18 +38,50 @@
             <a href="../logout.php" class="btn btn-info float-right">Đăng xuất</a>
         </div>
     </div>
+    <div class="row mt-3">
+        <div class="col-sm-12">
+            <form action="show_product.php" method="get" class="d-flex flex-nowrap">
+                <div class="form-group m-2">
+                    <input type="text" name="keyword" class="form-control" placeholder="Keyword">
+                </div>
+                <div class="form-group m-2">
+                    <select name="category" class="form-control">
+                        <option value="">All Categories</option>
+                        <?php
+                        $categoryResult = $conn->query("SELECT category_id, name FROM categories");
+                        while ($category = $categoryResult->fetch_assoc()) {
+                            echo "<option value='" . $category['category_id'] . "'>" . $category['name'] . "</option>";
+                        }
+                        ?>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary m-2">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <?php
+    $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
+    $category = isset($_GET['category']) ? $_GET['category'] : '';
+
     $limit = 10;
     $page = isset($_GET['page']) ? $_GET['page'] : 1;
     $start = ($page - 1) * $limit;
 
+    $whereClause = " WHERE products.name LIKE '%$keyword%'";
+    if ($category != '') {
+        $whereClause .= " AND categories.category_id = '$category'";
+    }
+
     $sql = "SELECT `product_id`,products.name, `image`, `price`,
             `description`, categories.name as `catName`  FROM `products`
-            INNER JOIN categories on categories.category_id = products.category_id
-            order by products.create_at DESC LIMIT $start, $limit";
+            INNER JOIN categories on categories.category_id = products.category_id"
+        . $whereClause .
+        " order by products.create_at DESC LIMIT $start, $limit";
     $result = $conn->query($sql);
 
-    $total_result = $conn->query("SELECT COUNT(*) as total FROM `products`");
+    $total_result = $conn->query("SELECT COUNT(*) as total FROM `products` INNER JOIN categories on categories.category_id = products.category_id" . $whereClause);
     $total_row = $total_result->fetch_assoc();
     $total_pages = ceil($total_row['total'] / $limit);
 
@@ -73,7 +104,8 @@
                     $counter = ($page - 1) * $limit + 1;
                     while ($row = $result->fetch_assoc()) { ?>
                         <tr>
-                        <td><input type="checkbox" name="checkbox[]" value="<?php echo $row['product_id']; ?>"></td>                            <td><?php echo $row['name'] ?></td>
+                            <td><input type="checkbox" name="checkbox[]" value="<?php echo $row['product_id']; ?>"></td>
+                            <td><?php echo $row['name'] ?></td>
                             <td>
                                 <img class="card-img-top" style="width: 5rem;" src="../asset/image/<?php echo $row['image'] ?>" alt="Card image cap">
                             </td>
