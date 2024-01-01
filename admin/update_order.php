@@ -17,7 +17,7 @@
             <form action="" method="post" class="form-group">
                 <h1 class="text-center">Update order</h1>
                 <div class="form-group">
-                    <label for="">status:</label>
+                    <label for="">Status:</label>
                     <input type="text " name="status" class="form-control" value="<?php echo $row['status']; ?> ">
                 </div>
                 <input type="submit" name="submit" value="update" class="btn btn-success">

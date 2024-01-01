@@ -21,16 +21,17 @@
             <h1 class="text-center">Sửa sản phẩm</h1>
             <div class="form-group">
                 <label for="">Tên sản phẩm</label>
-                <input type="text " name="name" class="form-control" value="<?php echo $row['name']?>">
+                <input type="text" name="name" class="form-control" value="<?php echo $row['name']?>">
             </div>
             <div class="form-group mt-3">
                 <label for="category">Danh mục</label><br>
-                <select name="category_id" id="category" class="form-select w-100">
-                    <option selected value="">Chọn danh mục</option>
+                <select name="category_id" id="category_id" class="form-select w-100">
+                    
                     <?php
                     if (mysqli_num_rows($result_1) > 0) {
                         while ($row_1 = mysqli_fetch_assoc($result_1)) { ?>
-                            <option value="<?php echo $row_1['category_id'] ?>"><?php echo $row_1['name'] ?></option>
+                            <option selected value="<?php echo $row['category_id'] ?>"><?php echo $row_1['name'] ?></option>
+
                     <?php
                         }
                     }
@@ -45,10 +46,7 @@
                 <label for="description">Mô tả</label>
                 <input type="text" name="description" class="form-control" value="<?php echo $row['description']?>">
             </div>
-            <div class="form-group mt-3">
-                <label for="image">Hình ảnh</label>
-                <input type="file" id="image" name="image"value="<?php echo $row['image']?>">
-            </div>
+            
             <input type="submit" name="submit" value="Update" class="btn btn-success">
         </form>
         </div>
@@ -59,7 +57,7 @@
             $category = $_POST['category_id'];
             $price = $_POST['price'];
             $description = $_POST['description'];
-            $sql = "UPDATE `products` SET 'name'=$name, 'category_id'=$category,  'price'=$price, 'description'=$description WHERE `feedback_id` = '$id'";
+            $sql = "UPDATE `products` SET 'name'=$name, 'category_id'=$category,  'price'=$price, 'description'=$description WHERE `product_id` = '$id'";
             if ($conn->query($sql) === TRUE) {
                 echo "<script>alert('Record updated successfully')</script>";
                 echo "<script>window.location.href = 'show_product.php'</script>";

@@ -77,7 +77,8 @@
                             <td><?php echo $row['catName'] ?></td>
                             <td><?php echo $row['price'] ?></td>
                             <td><?php echo $row['description'] ?></td>
-                            <td><a href='?action=delete&id=<?php echo $row['product_id'] ?>' class='ml-1' onclick='return confirmDelete()'><i class='fas fa-trash-alt'></i></a>
+                            <td><a href='update_product.php?id= <?php echo $row['product_id'] ?> '><i class='fas fa-edit'></i></a>
+                                <a href='?action=delete&id=<?php echo $row['product_id'] ?>' class='ml-1' onclick='return confirmDelete()'><i class='fas fa-trash-alt'></i></a>
                             </td>
                         </tr>
                     <?php

@@ -12,6 +12,7 @@
         <div class="col-sm-6 my-auto">
             <a href="index.php" class="btn btn-info float-right mr-1">Trang chủ</a>
             <a href="../logout.php" class="btn btn-info float-right">Đăng xuất</a>
+            <a href="create_user.php" class="btn btn-info float-right">Thêm người dùng mới</a>
         </div>
     </div>
     <?php
@@ -46,7 +47,8 @@
                         <td><?php echo $row['username'] ?></td>   
                         <td><?php echo $row['fullname'] ?></td>
                         <td><?php echo $row['email'] ?></td>
-                        <td><a href='delete_user.php?id= <?php echo $row['user_id'] ?>' class='ml-1' onclick='return confirmDelete()'><i class='fas fa-trash-alt'></i></a>
+                        <td><a href='update_user.php?id= <?php echo $row['user_id'] ?> '><i class='fas fa-edit'></i></a>
+                            <a href='delete_user.php?id= <?php echo $row['user_id'] ?>' class='ml-1' onclick='return confirmDelete()'><i class='fas fa-trash-alt'></i></a>
                         </td>
                     </tr>
                 <?php
