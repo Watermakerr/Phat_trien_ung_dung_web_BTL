@@ -68,7 +68,6 @@
                                 echo $row_2['name']; 
                             } ?>
                         </td>
-                        <td><?php echo $row['product_id'] ?></td>
                         <td><?php echo $row['create_at'] ?></td>
                         <td><a href='update_feedback.php?id= <?php echo $row['feedback_id'] ?> '><i class='fas fa-edit'></i></a>
                             <a href='delete_feedback.php?id= <?php echo $row['feedback_id'] ?>' class='ml-1' onclick='return confirmDelete()'><i class='fas fa-trash-alt'></i></a>

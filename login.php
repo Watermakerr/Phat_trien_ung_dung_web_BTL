@@ -42,7 +42,6 @@
         } else {
             $error = "Sai tên đăng nhập";
         }
-        // close connection
         mysqli_close($conn);
     }
     ?>
