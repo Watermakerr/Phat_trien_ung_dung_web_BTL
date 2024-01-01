@@ -9,8 +9,8 @@
     <?php
     session_start();
     require 'connect.php';
-    $id = $_GET['id'];
-    $message = $_GET['message'];
+    $id = $_POST['id'];
+    $message = $_POST['message'];
     $user_id = $_SESSION['user_id'];
     $sql = "INSERT INTO `feedbacks`(`message`, `user_id`, `product_id`) VALUES ('$message','$user_id','$id')";
     if ($conn->query($sql) === TRUE) {

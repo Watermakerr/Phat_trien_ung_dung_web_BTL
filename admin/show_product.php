@@ -44,7 +44,10 @@
     $page = isset($_GET['page']) ? $_GET['page'] : 1;
     $start = ($page - 1) * $limit;
 
-    $sql = "SELECT `product_id`,products.name, `image`, `price`,`description`, categories.name as `catName`  FROM `products` INNER JOIN categories on categories.category_id = products.category_id order by products.create_at DESC LIMIT $start, $limit";
+    $sql = "SELECT `product_id`,products.name, `image`, `price`,
+            `description`, categories.name as `catName`  FROM `products`
+            INNER JOIN categories on categories.category_id = products.category_id
+            order by products.create_at DESC LIMIT $start, $limit";
     $result = $conn->query($sql);
 
     $total_result = $conn->query("SELECT COUNT(*) as total FROM `products`");
