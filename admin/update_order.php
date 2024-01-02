@@ -29,10 +29,10 @@
             $status = $_POST['status'];
             $sql = "UPDATE `orders` SET `status`='$status' WHERE `order_id` = '$id'";
             if ($conn->query($sql) === TRUE) {
-                echo "<script>alert('Record updated successfully')</script>";
+                echo "<script>alert('Cập nhật thành công')</script>";
                 echo "<script>window.location.href = 'show_order.php'</script>";
             } else {
-                echo "<script>alert('Error updating record')</script>";
+                echo "<script>alert('Có lỗi xảy ra')</script>";
             }
             $conn->close();
         }

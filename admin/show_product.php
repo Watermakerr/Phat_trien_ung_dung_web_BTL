@@ -13,7 +13,7 @@
                 if ($conn->query($sql) !== TRUE) {
                     echo "<script>alert('Không thể xóa sản phầm này')</script>";
                 } else {
-                    header("Location: show_product.php");
+                    echo "<script>alert('Xóa thành công')</script>";
                 }
             }
         }
@@ -22,6 +22,8 @@
             $sql = "DELETE FROM `products` WHERE product_id = $id";
             if ($conn->query($sql) !== TRUE) {
                 echo "<script>alert('Không thể xóa sản phầm này')</script>";
+            } else {
+                echo "<script>alert('Xóa thành công')</script>";
             }
         }
     }

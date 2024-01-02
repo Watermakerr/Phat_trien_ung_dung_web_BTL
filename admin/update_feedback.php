@@ -29,10 +29,10 @@
             $message = $_POST['message'];
             $sql = "UPDATE `feedbacks` SET `message`='$message' WHERE `feedback_id` = '$id'";
             if ($conn->query($sql) === TRUE) {
-                echo "<script>alert('Record updated successfully')</script>";
+                echo "<script>alert('Cập nhật thành công')</script>";
                 echo "<script>window.location.href = 'show_feedback.php'</script>";
             } else {
-                echo "<script>alert('Error updating record')</script>";
+                echo "<script>alert('Có lỗi xảy ra')</script>";
             }
             $conn->close();
         }

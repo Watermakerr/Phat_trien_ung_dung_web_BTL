@@ -24,7 +24,7 @@ $total_row = $total_result->fetch_assoc();
 $total_pages = ceil($total_row['total'] / $limit);
 
 if ($result->num_rows > 0) { ?>
-    <form action="?action=delete" method="post">
+    <form action="show_product.php?action=delete" method="post">
         <table class='table table-bordered table-striped text-center'>
             <thead class='thead-dark'>
                 <tr>

@@ -42,7 +42,7 @@
             $fullname = $_POST ['fullname'];
             $email = $_POST ['email'];
             $password = $_POST ['password'];
-            $sql_1 = "UPDATE `users` SET `username`='$username', 'fullname'='$fullname', 'email'='$email', 'password'='$password' WHERE `user_id` = '$id'";
+            $sql_1 = "UPDATE `users` SET username ='$username', fullname='$fullname', email='$email', password='$password' WHERE user_id = '$id'";
             if ($conn->query($sql_1) === TRUE) {
                 echo "<script>alert('Record updated successfully')</script>";
                 echo "<script>window.location.href = 'show_user.php'</script>";
