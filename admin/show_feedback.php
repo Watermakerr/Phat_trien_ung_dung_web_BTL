@@ -52,7 +52,7 @@
                 $counter = ($page - 1) * $limit + 1;
                 while ($row = $result->fetch_assoc()) { ?>
                     <tr>
-                        <td><input type="checkbox" name="checkbox" value = "<?php $row['feedback_id']?>"></td>
+                        <td><input type="checkbox" name="checkbox[]" value = "<?php $row['feedback_id']?>"></td>
                         <td><?php echo $row['message'] ?></td>
                         <td>
                         <?php
