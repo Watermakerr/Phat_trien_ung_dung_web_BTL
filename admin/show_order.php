@@ -4,6 +4,29 @@
 <body>
     <?php
     require 'header.php';
+    if ($_GET['action'] == 'delete') {
+        if (isset($_POST['checkbox'])) {
+            $ids = $_POST['checkbox'];
+            if (!empty($ids)) {
+                $ids = implode(',', array_map('intval', $ids)); // Sanitize the ids
+                $sql = "DELETE FROM `orders` WHERE order_id IN ($ids)";
+                if ($conn->query($sql) !== TRUE) {
+                    echo "<script>alert('Không thể xóa đơn hàng này')</script>";
+                } else {
+                    echo "<script>alert('Xóa thành công')</script>";
+                }
+            }
+        }
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $sql = "DELETE FROM `orders` WHERE order_id = $id";
+            if ($conn->query($sql) !== TRUE) {
+                echo "<script>alert('Không thể xóa đơn hàng này')</script>";
+            } else {
+                echo "<script>alert('Xóa thành công')</script>";
+            }
+        }
+    }
     ?>
     <div class="row bg-dark mr-0 py-1">
         <div class="col-sm-6">
@@ -27,6 +50,7 @@
     $total_pages = ceil($total_row['total'] / $limit);
 
     if ($result->num_rows > 0) { ?>
+    <form action="?action=delete" method="post">
         <table class='table table-bordered table-striped text-center'>
             <thead class='thead-dark'>
                 <tr>
@@ -41,7 +65,7 @@
                 $counter = ($page - 1) * $limit + 1;
                 while ($row = $result->fetch_assoc()) { ?>
                     <tr>
-                        <td><input type="checkbox" name="checkbox" value="<?php $row['order_id'] ?>"></td>
+                        <td><input type="checkbox" name="checkbox[]" value="<?php echo $row['order_id'] ?>"></td>
                         <td><?php echo $row['order_id'] ?></td>
                         <td>
                             <?php
@@ -59,9 +83,9 @@
                             ?>
                         </td>
                         <td>
-                            <a href='order_detail.php?id= <?php echo $row['order_id']?>'><i class="fas fa-eye"></i></a>
-                            <a href='update_order.php?id= <?php echo $row['order_id'] ?> '><i class='fas fa-edit'></i></a>
-                            <a href='delete_order.php?id= <?php echo $row['order_id'] ?>' class='ml-1' onclick='return confirmDelete()'><i class='fas fa-trash-alt'></i></a>
+                            <a href='order_detail.php?id=<?php echo $row['order_id']?>'><i class="fas fa-eye"></i></a>
+                            <a href='update_order.php?id=<?php echo $row['order_id']?> '><i class='fas fa-edit'></i></a>
+                            <a href='?action=delete&id=<?php echo $row['order_id']?>' class='ml-1' onclick='return confirmDelete()'><i class='fas fa-trash-alt'></i></a>
                         </td>
                     </tr>
                 <?php
@@ -70,6 +94,8 @@
                 ?>
             </tbody>
         </table>
+        <button type="submit" class="btn btn-danger mb-3" onclick="return confirmDelete()">Xóa</button>
+    </form>
     <?php
     } else {
         echo "0 results";

@@ -25,7 +25,7 @@ if (isset($_POST['submit'])) {
     if (count($error) == 0) {
         $sql = "INSERT INTO `products`(`name`, `category_id`, `price`,`description`, `image`) VALUES ('$name','$category_id','$price','$description','$image')";
         if ($conn->query($sql) === TRUE) {
-            echo "<script>alert('Data added succesfully')</script>";
+            echo "<script>alert('Thêm sản phẩm thành công')</script>";
             echo "<script>window.location.href = 'show_product.php'</script>";
         }
     }

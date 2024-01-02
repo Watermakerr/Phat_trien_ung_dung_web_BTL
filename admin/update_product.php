@@ -4,6 +4,24 @@
 <body>
     <?php
     require 'header.php';
+    if (isset($_POST['submit'])) {
+        $id = $_GET['id'];
+        $name = $_POST['name'];
+        $category = $_POST['category_id'];
+        $price = $_POST['price'];
+        $description = $_POST['description'];
+        $stmt = $conn->prepare("UPDATE `products` SET name=?, category_id=?, price=?, description=? WHERE product_id = ?");
+        $stmt->bind_param("siisi", $name, $category, $price, $description, $id);
+        if ($stmt->execute()) {
+            echo "<script>alert('Record updated successfully')</script>";
+            echo "<script>window.location.href = 'show_product.php'</script>";
+        } else {
+            echo "<script>alert('Error updating record')</script>";
+        }
+        $conn->close();
+    }
+    ?>
+    <?php
     $sql_1 = "SELECT category_id, name FROM  categories";
     $result_1 = mysqli_query($conn, $sql_1);
 
@@ -50,24 +68,6 @@
                 <input type="submit" name="submit" value="Update" class="btn btn-success">
             </form>
         </div>
-        <?php
-        if (isset($_POST['submit'])) {
-            $id = $_GET['id'];
-            $name = $_POST['name'];
-            $category = $_POST['category_id'];
-            $price = $_POST['price'];
-            $description = $_POST['description'];
-            $stmt = $conn->prepare("UPDATE `products` SET name=?, category_id=?, price=?, description=? WHERE product_id = ?");
-            $stmt->bind_param("siisi", $name, $category, $price, $description, $id);
-            if ($stmt->execute()) {
-                echo "<script>alert('Record updated successfully')</script>";
-                echo "<script>window.location.href = 'show_product.php'</script>";
-            } else {
-                echo "<script>alert('Error updating record')</script>";
-            }
-            $conn->close();
-        }
-        ?>
 </body>
 
 </html>

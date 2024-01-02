@@ -4,6 +4,29 @@
 <body>
     <?php
     require 'header.php';
+    if ($_GET['action'] == 'delete') {
+        if (isset($_POST['checkbox'])) {
+            $ids = $_POST['checkbox'];
+            if (!empty($ids)) {
+                $ids = implode(',', array_map('intval', $ids)); // Sanitize the ids
+                $sql = "DELETE FROM `feedbacks` WHERE feedback_id IN ($ids)";
+                if ($conn->query($sql) !== TRUE) {
+                    echo "<script>alert('Không thể xóa feedback này')</script>";
+                } else {
+                    echo "<script>alert('Xóa thành công')</script>";
+                }
+            }
+        }
+        if (isset($_GET['id'])) {
+            $id = $_GET['id'];
+            $sql = "DELETE FROM `feedbacks` WHERE feedback_id = $id";
+            if ($conn->query($sql) !== TRUE) {
+                echo "<script>alert('Không thể xóa feedback này')</script>";
+            } else {
+                echo "<script>alert('Xóa thành công')</script>";
+            }
+        }
+    }
     ?>
     <div class="row bg-dark mr-0 py-1">
         <div class="col-sm-6">
@@ -11,9 +34,6 @@
         </div>
         <div class="col-sm-6 my-auto">
             <a href="../logout.php" class="btn btn-info float-right">Đăng xuất</a>
-            <a href="create_feedback.php" class="btn btn-info float-right mr-1">
-                <i class="fas fa-plus"></i> Thêm bình luận mới
-            </a>
             <a href="index.php" class="btn btn-info float-right mr-1">Trang chủ</a>
         </div>
     </div>
@@ -36,49 +56,54 @@
     $total_pages = ceil($total_row['total'] / $limit);
 
     if ($result->num_rows > 0) { ?>
-        <table class='table table-bordered table-striped text-center'>
-            <thead class='thead-dark'>
-                <tr>
-                    <th></th>
-                    <th>Message</th>
-                    <th>User</th>
-                    <th>Product</th>
-                    <th>Time</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                $counter = ($page - 1) * $limit + 1;
-                while ($row = $result->fetch_assoc()) { ?>
+        <form action="show_feedback.php?action=delete" method="post">
+            <table class='table table-bordered table-striped text-center'>
+                <thead class='thead-dark'>
                     <tr>
-                        <td><input type="checkbox" name="checkbox[]" value = "<?php $row['feedback_id']?>"></td>
-                        <td><?php echo $row['message'] ?></td>
-                        <td>
-                        <?php
-                            if (mysqli_num_rows($result_1) > 0) {
-                                $row_1 = mysqli_fetch_assoc($result_1);
-                                echo $row_1['username']; 
-                            } ?>
-                        </td>
-                        <td>
-                        <?php
-                            if (mysqli_num_rows($result_2) > 0) {
-                                $row_2 = mysqli_fetch_assoc($result_2);
-                                echo $row_2['name']; 
-                            } ?>
-                        </td>
-                        <td><?php echo $row['create_at'] ?></td>
-                        <td><a href='update_feedback.php?id= <?php echo $row['feedback_id'] ?> '><i class='fas fa-edit'></i></a>
-                            <a href='delete_feedback.php?id= <?php echo $row['feedback_id'] ?>' class='ml-1' onclick='return confirmDelete()'><i class='fas fa-trash-alt'></i></a>
-                        </td>
+                        <th></th>
+                        <th>Message</th>
+                        <th>User</th>
+                        <th>Product</th>
+                        <th>Time</th>
+                        <th>Action</th>
                     </tr>
-                <?php
-                    $counter++;
-                }
-                ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php
+                    $counter = ($page - 1) * $limit + 1;
+                    while ($row = $result->fetch_assoc()) { ?>
+                        <form action=""></form>
+                        <tr>
+                            <td><input type="checkbox" name="checkbox[]" value="<?php echo $row['feedback_id']; ?>"></td>
+                            <td><?php echo $row['message'] ?></td>
+                            <td>
+                                <?php
+                                if (mysqli_num_rows($result_1) > 0) {
+                                    $row_1 = mysqli_fetch_assoc($result_1);
+                                    echo $row_1['username'];
+                                } ?>
+                            </td>
+                            <td>
+                                <?php
+                                if (mysqli_num_rows($result_2) > 0) {
+                                    $row_2 = mysqli_fetch_assoc($result_2);
+                                    echo $row_2['name'];
+                                } ?>
+                            </td>
+                            <td><?php echo $row['create_at'] ?></td>
+                            <td><a href='update_feedback.php?id= <?php echo $row['feedback_id'] ?> '><i class='fas fa-edit'></i></a>
+                                <a href='?action=delete&id=<?php echo $row['feedback_id'] ?>' class='ml-1' onclick='return confirmDelete()'><i class='fas fa-trash-alt'></i></a>
+                            </td>
+                        </tr>
+                    <?php
+                        $counter++;
+                    }
+                    ?>
+                </tbody>
+            </table>
+            <input class="btn btn-danger" type="submit" name="delete" value="Delete Selected" onclick="return confirmDelete()">
+
+        </form>
     <?php
     } else {
         echo "0 results";
