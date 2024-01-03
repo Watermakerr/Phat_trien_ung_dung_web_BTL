@@ -17,7 +17,7 @@ if (isset($_GET['category'])) {
     }
     $category_row = $category_result->fetch_assoc();
 } elseif (isset($_GET['keyword'])) {
-    $keyword = $_GET['keyword'];
+    $keyword = trim($_GET['keyword']);
     $sql = "SELECT product_id, name, price, image FROM products
             WHERE name LIKE '%$keyword%'";
 } else {
