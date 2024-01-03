@@ -4,14 +4,38 @@
 <body>
     <?php
     require 'header.php';
+    $id = $_GET['id'];
+
+    $sql = "SELECT image FROM `products` WHERE product_id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $image = $row['image'];
+
     if (isset($_POST['submit'])) {
-        $id = $_GET['id'];
         $name = $_POST['name'];
         $category = $_POST['category_id'];
         $price = $_POST['price'];
         $description = $_POST['description'];
-        $stmt = $conn->prepare("UPDATE `products` SET name=?, category_id=?, price=?, description=? WHERE product_id = ?");
-        $stmt->bind_param("siisi", $name, $category, $price, $description, $id);
+
+        // If a new image is uploaded, replace the old image with the new one
+        if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+            $file = $_FILES['image'];
+            $file_name = $file['name'];
+            if ($file['type'] == 'image/png' || $file['type'] == 'image/jpg' || $file['type'] == 'image/jpeg' || $file['type'] == 'image/webp') {
+                $image = $file['name'];
+            } else {
+                echo "<script>alert('Lỗi định dạng file ảnh')</script>";
+                echo "<script>window.location.href = 'update_product.php?id=$id'</script>";
+                
+            }
+        }
+
+        $sql = "UPDATE `products` SET name=?, category_id=?, price=?, description=?, image=? WHERE product_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("siissi", $name, $category, $price, $description, $image, $id);
         if ($stmt->execute()) {
             echo "<script>alert('Record updated successfully')</script>";
             echo "<script>window.location.href = 'show_product.php'</script>";
@@ -63,6 +87,12 @@
                 <div class="form-group mt-3">
                     <label for="description">Mô tả</label>
                     <input type="text" name="description" class="form-control" value="<?php echo $row['description'] ?>">
+                </div>
+                <div class="form-group mt-3">
+                    <label for="image">Hình ảnh</label>
+                    <input type="file" id="image" name="image"><br>
+                    <span>Ảnh cũ:</span>
+                    <img src="../asset/image/<?php echo $image; ?>" alt="Old image" style="width: 100px; height: auto;">
                 </div>
 
                 <input type="submit" name="submit" value="Update" class="btn btn-success">
