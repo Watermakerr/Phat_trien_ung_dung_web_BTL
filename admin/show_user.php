@@ -42,7 +42,9 @@
     $page = isset($_GET['page']) ? $_GET['page'] : 1;
     $start = ($page - 1) * $limit;
 
-    $sql = "SELECT * FROM `users` order by `create_at` DESC LIMIT $start, $limit";
+    $sql = "SELECT user_id, username, fullname, email, role_name FROM `users`
+            INNER JOIN roles ON roles.role_id = users.role_id
+            order by users.create_at DESC LIMIT $start, $limit";
     $result = $conn->query($sql);
 
     $total_result = $conn->query("SELECT COUNT(*) as total FROM `users`");
@@ -58,6 +60,7 @@
                         <th>Tên đăng nhập</th>
                         <th>Họ và tên </th>
                         <th>Email</th>
+                        <th>Vai trò</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -70,6 +73,7 @@
                             <td><?php echo $row['username'] ?></td>
                             <td><?php echo $row['fullname'] ?></td>
                             <td><?php echo $row['email'] ?></td>
+                            <td><?php echo $row['role_name'] ?></td>
                             <td><a href='update_user.php?id=<?php echo $row['user_id'] ?> '><i class='fas fa-edit'></i></a>
                                 <a href='?action=delete&id=<?php echo $row['user_id'] ?>' class='ml-1' onclick='return confirmDelete()'><i class='fas fa-trash-alt'></i></a>
                             </td>

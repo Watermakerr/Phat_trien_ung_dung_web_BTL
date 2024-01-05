@@ -25,6 +25,9 @@ require 'header.php';
 					<tr>
 						<th scope="row"><a href="show_user.php" style="color: #d75335;text-decoration: none;"><i class="fas fa-eye"></i> Quản lý người dùng</a></th><br>
 					</tr>
+					<tr>
+						<th scope="row"><a href="show_category.php" style="color: #d75335;text-decoration: none;"><i class="fas fa-eye"></i> Quản lý danh mục</a></th><br>
+					</tr>
 				</tbody>
 			</table>
 		</div>
