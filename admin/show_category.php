@@ -32,7 +32,6 @@
             }
         }
         ?>
-    ?>
     <div class="row bg-dark mr-0 py-1">
         <div class="col-sm-6">
             <h1 class="text-center text-white float-left ml-3">Show category</h1>
