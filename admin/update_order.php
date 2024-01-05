@@ -17,8 +17,15 @@
             <form action="" method="post" class="form-group">
                 <h1 class="text-center">Update order</h1>
                 <div class="form-group">
-                    <label for="">Status:</label>
-                    <input type="text " name="status" class="form-control" value="<?php echo $row['status']; ?> ">
+                    <label for="status">Tình trạng đơn hàng</label>
+                    <select name="status" id="" class="form-control">
+                        <option value="0">Đang chờ xác nhận</option>
+                        <option value="1">Đã xác nhận</option>
+                        <option value="2">Đang giao hàng</option>
+                        <option value="3">Đã giao hàng</option>
+                        <option value="4">Đã hủy</option>
+                    </select>
+                    
                 </div>
                 <input type="submit" name="submit" value="update" class="btn btn-success">
             </form>
