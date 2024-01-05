@@ -87,7 +87,7 @@
     <div class="container-fluid px-0" style="margin-top: 60px;">
         <div class="row">
             <div class="col-12">
-                <img src="asset\image\tuan-le-infinix-2023-sliding.webp" alt="" class="img-fluid w-100">
+                <img src="asset/image/banner.webp" alt="" class="img-fluid w-100">
             </div>
         </div>
     </div>

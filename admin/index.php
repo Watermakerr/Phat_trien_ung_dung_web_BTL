@@ -34,10 +34,12 @@ require 'header.php';
 							AS revenue FROM orders JOIN order_details
 							ON orders.order_id = order_details.order_id JOIN products
 							ON order_details.product_id = products.product_id
-							WHERE orders.create_at > DATE_SUB(NOW(), INTERVAL 30 DAY)";
+							WHERE orders.create_at > DATE_SUB(NOW(), INTERVAL 30 DAY)
+							and orders.status = 3";
 
 			$orderQuery = "SELECT COUNT(*) AS orders FROM orders
-								WHERE create_at > DATE_SUB(NOW(), INTERVAL 30 DAY)";
+							WHERE create_at > DATE_SUB(NOW(), INTERVAL 30 DAY)
+							and status != 4";
 
 			$revenueResult = $conn->query($revenueQuery);
 			$orderResult = $conn->query($orderQuery);
