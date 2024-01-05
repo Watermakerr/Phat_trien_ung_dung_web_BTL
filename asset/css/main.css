@@ -31,7 +31,7 @@
   color: #fff !important;
 }
 .mt-custom {
-  margin-top: 100px; /* Adjust this value as needed */
+  margin-top: 100px;
 }
 .img-order {
   display: block;
@@ -43,10 +43,4 @@
 
 .pointer-default {
   cursor:default ;
-}
-.wrapper {
-  display: flex;
-  width: 100%;
-  align-items: stretch;
-  overflow-x: hidden;
 }

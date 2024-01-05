@@ -42,7 +42,9 @@
     $page = isset($_GET['page']) ? $_GET['page'] : 1;
     $start = ($page - 1) * $limit;
 
-    $sql = "SELECT * FROM `orders` LIMIT $start, $limit";
+    $sql = "SELECT username, order_id, status FROM `orders`
+            INNER JOIN users 
+            ON users.user_id = orders.user_id LIMIT $start, $limit";
     $result = $conn->query($sql);
 
     $total_result = $conn->query("SELECT COUNT(*) as total FROM `orders`");
@@ -56,8 +58,9 @@
                 <tr>
                     <th></th>
                     <th>Mã đơn</th>
+                    <th>Tài khoản đặt hàng</th>
                     <th>Trạng thái đơn hàng</th>
-                    <th></th>
+                    <th>Hành động</th>
                 </tr>
             </thead>
             <tbody>
@@ -67,6 +70,7 @@
                     <tr>
                         <td><input type="checkbox" name="checkbox[]" value="<?php echo $row['order_id'] ?>"></td>
                         <td><?php echo $row['order_id'] ?></td>
+                        <td><?php echo $row['username'] ?></td>
                         <td>
                             <?php
                             if ($row['status'] == 0) {
