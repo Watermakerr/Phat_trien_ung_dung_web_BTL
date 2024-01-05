@@ -44,3 +44,17 @@ if (isset($_POST['submit'])) {
         </form>
     </div>
 </div>
+<script>
+document.querySelector("form").addEventListener("submit", function(e) {
+    var name = document.querySelector("input[name='message']").value;
+    var status = document.querySelector("input[name='status']:checked");
+
+    if (name === "") {
+        e.preventDefault();
+        alert("Chưa nhập tên danh mục");
+    } else if (status === null) {
+        e.preventDefault();
+        alert("Chưa chọn status");
+    }
+});
+</script>
