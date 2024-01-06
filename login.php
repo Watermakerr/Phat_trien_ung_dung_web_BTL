@@ -28,7 +28,6 @@ if (isset($_POST['submit'])) {
     } else {
         $error = "Sai tên đăng nhập";
     }
-    mysqli_close($conn);
 }
 ?>
 <div class="container">
