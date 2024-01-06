@@ -4,7 +4,7 @@ function confirmDelete() {
 function checkQuantity() {
     const quantity = document.getElementById("quantity");
     if (quantity.value < 1 || quantity.value == "") {
-        alert("Quantity must be greater than 0");
+        alert("Số lượng phải lớn hơn 0");
         return false;
     }
     return true;

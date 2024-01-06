@@ -87,15 +87,6 @@ if (isset($_GET['id'])) {
             event.preventDefault(); // Prevent the form from submitting
         }
     });
-
-    function checkQuantity() {
-        var quantity = document.querySelector('#quantity').value;
-        if (quantity < 1) {
-            alert('Số lượng phải lớn hơn 0');
-            return false;
-        }
-        return true;
-    }
 </script>
 <?php
 include 'footer.php';

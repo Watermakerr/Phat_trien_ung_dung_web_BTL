@@ -61,7 +61,7 @@ if ($result->num_rows > 0) { ?>
                 ?>
             </tbody>
         </table>
-        <input type="submit" name="delete" value="Delete Selected" onclick="return confirmDelete()">
+        <input class="btn btn-danger" type="submit" name="delete" value="Delete Selected" onclick="return confirmDelete()">
     </form>
 <?php
 } else {
@@ -72,8 +72,3 @@ for ($i = 1; $i <= $total_pages; $i++) {
     echo "<li class='page-item'><a class='page-link' href='?page=" . $i . "'>" . $i . "</a></li>";
 }
 ?>
-<script>
-    function confirmDelete() {
-        return confirm("Are you sure you want to delete this product?");
-    }
-</script>

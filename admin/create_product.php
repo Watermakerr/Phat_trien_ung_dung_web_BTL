@@ -75,3 +75,7 @@ if (isset($_POST['submit'])) {
             <input type="submit" name="submit" value="Add" class="btn btn-success">
         </form>
     </div>
+</div>
+<?php
+require_once 'footer.php';
+?>
