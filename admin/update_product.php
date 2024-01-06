@@ -35,7 +35,6 @@ if (isset($_POST['submit'])) {
     } else {
         echo "<script>alert('Error updating record')</script>";
     }
-    $conn->close();
 }
 ?>
 <?php
