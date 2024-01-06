@@ -42,16 +42,6 @@ if ($result->num_rows <= 0) {
     }
     ?>
 </div>
-<script>
-    document.querySelector("form").addEventListener("submit", function(e) {
-        var status = document.querySelector("input[name='status']:checked");
-
-        if (status === null) {
-            e.preventDefault();
-            alert("Chưa chọn status");
-        }
-    });
-</script>
 <?php
 require 'footer.php';
 ?>
