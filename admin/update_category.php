@@ -1,13 +1,5 @@
 <?php
 require 'header.php';
-$id = $_GET['id'];
-$sql = "SELECT * FROM `categories` WHERE `category_id` = '$id'";
-$result = $conn->query($sql);
-if ($result->num_rows <= 0) {
-    die("Record not found");
-} else {
-    $row = $result->fetch_assoc();
-}
 if (isset($_POST['submit'])) {
     $name = $_POST['message'];
     $status = $_POST['status'];
@@ -18,7 +10,15 @@ if (isset($_POST['submit'])) {
     } else {
         echo "<script>alert('Có lỗi xảy ra')</script>";
     }
-    $conn->close();
+} else {
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM `categories` WHERE `category_id` = '$id'";
+    $result = $conn->query($sql);
+    if ($result->num_rows <= 0) {
+        die("Record not found");
+    } else {
+        $row = $result->fetch_assoc();
+    }
 }
 ?>
 <div class="row">
@@ -45,16 +45,19 @@ if (isset($_POST['submit'])) {
     </div>
 </div>
 <script>
-document.querySelector("form").addEventListener("submit", function(e) {
-    var name = document.querySelector("input[name='message']").value;
-    var status = document.querySelector("input[name='status']:checked");
+    document.querySelector("form").addEventListener("submit", function(e) {
+        var name = document.querySelector("input[name='message']").value;
+        var status = document.querySelector("input[name='status']:checked");
 
-    if (name === "") {
-        e.preventDefault();
-        alert("Chưa nhập tên danh mục");
-    } else if (status === null) {
-        e.preventDefault();
-        alert("Chưa chọn status");
-    }
-});
+        if (name === "") {
+            e.preventDefault();
+            alert("Chưa nhập tên danh mục");
+        } else if (status === null) {
+            e.preventDefault();
+            alert("Chưa chọn status");
+        }
+    });
 </script>
+<?php
+require 'footer.php';
+?>

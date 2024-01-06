@@ -35,3 +35,6 @@ document.getElementById('productForm').addEventListener('submit', function(e) {
     }
 });
 </script>
+<?php
+require_once 'footer.php';
+?>
