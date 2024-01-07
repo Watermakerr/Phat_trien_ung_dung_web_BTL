@@ -61,7 +61,7 @@ if ($_GET['action'] == 'delete') {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
-        $('#search_form').on('change', function(e) {
+        $('#search_form').on('input', function(e) {
             e.preventDefault();
             $.ajax({
                 url: 'search_product.php',
@@ -72,7 +72,7 @@ if ($_GET['action'] == 'delete') {
                 }
             });
         });
-        $('#search_form').trigger('change');
+        $('#search_form').trigger('input');
     });
 </script>
 <?php
