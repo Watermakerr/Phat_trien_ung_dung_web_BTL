@@ -26,7 +26,7 @@ if ($_GET['action'] == 'delete') {
 ?>
 <div class="row bg-dark mr-0 py-1">
     <div class="col-sm-6">
-        <h1 class="text-center text-white float-left ml-3 ">Show product</h1>
+        <h1 class="text-center text-white float-left ml-3 ">Show user</h1>
     </div>
     <div class="col-sm-6 my-auto">
         <a href="index.php" class="btn btn-info float-right mr-1">Trang chủ</a>
