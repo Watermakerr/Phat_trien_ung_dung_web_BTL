@@ -4,7 +4,7 @@ if ($_GET['action'] == 'delete') {
     if (isset($_POST['checkbox'])) {
         $ids = $_POST['checkbox'];
         if (!empty($ids)) {
-            $ids = implode(',', array_map('intval', $ids)); 
+            $ids = implode(',', array_map('intval', $ids));
             $sql = "DELETE FROM `orders` WHERE order_id IN ($ids)";
             if ($conn->query($sql) !== TRUE) {
                 echo "<script>alert('Không thể xóa đơn hàng này')</script>";
@@ -69,16 +69,25 @@ if ($result->num_rows > 0) { ?>
                         <td><?php echo $row['username'] ?></td>
                         <td>
                             <?php
-                            if ($row['status'] == 0) {
-                                echo "Đang chờ xác nhận";
-                            } elseif ($row['status'] == 1) {
-                                echo "Đã xác nhận";
-                            } elseif ($row['status'] == 2) {
-                                echo "Đang giao hàng";
-                            } elseif ($row['status'] == 3) {
-                                echo "Đã giao hàng";
-                            } elseif ($row['status'] == 4) {
-                                echo "Đã hủy";
+                            switch ($row['status']) {
+                                case 0:
+                                    echo "Đang chờ xác nhận";
+                                    break;
+                                case 1:
+                                    echo "Đã xác nhận";
+                                    break;
+                                case 2:
+                                    echo "Đang giao hàng";
+                                    break;
+                                case 3:
+                                    echo "Đã giao hàng";
+                                    break;
+                                case 4:
+                                    echo "Đã hủy";
+                                    break;
+                                default:
+                                    echo "Trạng thái không xác định";
+                                    break;
                             }
                             ?>
                         </td>

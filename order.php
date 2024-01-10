@@ -28,16 +28,25 @@ if (!isset($_SESSION['user_id'])) {
                     <td><?php echo $row['create_at']; ?></td>
                     <td>
                         <?php
-                        if ($row['status'] == 0) {
-                            echo "Đang chờ xác nhận";
-                        } elseif ($row['status'] == 1) {
-                            echo "Đã xác nhận";
-                        } elseif ($row['status'] == 2) {
-                            echo "Đang giao hàng";
-                        } elseif ($row['status'] == 3) {
-                            echo "Đã giao hàng";
-                        } elseif ($row['status'] == 4) {
-                            echo "Đã hủy";
+                        switch ($row['status']) {
+                            case 0:
+                                echo "Đang chờ xác nhận";
+                                break;
+                            case 1:
+                                echo "Đã xác nhận";
+                                break;
+                            case 2:
+                                echo "Đang giao hàng";
+                                break;
+                            case 3:
+                                echo "Đã giao hàng";
+                                break;
+                            case 4:
+                                echo "Đã hủy";
+                                break;
+                            default:
+                                echo "Trạng thái không xác định";
+                                break;
                         }
                         ?>
                     </td>

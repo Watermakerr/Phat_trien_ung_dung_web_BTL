@@ -41,8 +41,7 @@ require 'header.php';
 							and orders.status = 3";
 
 			$orderQuery = "SELECT COUNT(*) AS orders FROM orders
-							WHERE create_at > DATE_SUB(NOW(), INTERVAL 30 DAY)
-							and status != 4";
+							WHERE create_at > DATE_SUB(NOW(), INTERVAL 30 DAY)";
 
 			$revenueResult = $conn->query($revenueQuery);
 			$orderResult = $conn->query($orderQuery);
