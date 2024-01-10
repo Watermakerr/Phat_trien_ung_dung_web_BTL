@@ -66,7 +66,7 @@ if (isset($_POST['submit'])) {
             </div>
             <div class="form-group mt-3">
                 <label for="description">Mô tả</label>
-                <input type="text" name="description" class="form-control">
+                <textarea name="description" id="description" class="form-control" rows="5"></textarea>
             </div>
             <div class="form-group mt-3">
                 <label for="image">Hình ảnh</label>
@@ -76,6 +76,10 @@ if (isset($_POST['submit'])) {
         </form>
     </div>
 </div>
+<script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('description');
+</script>
 <?php
 require_once 'footer.php';
 ?>

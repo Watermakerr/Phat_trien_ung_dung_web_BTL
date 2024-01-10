@@ -52,7 +52,7 @@ if (isset($_GET['action']) && $_GET['action'] == 'delete') {
             </table>
             <div class="text-center">
                 <a href="index.php" class="btn btn-primary">Tiếp tục mua hàng</a>
-                <button type="submit" class="btn btn-success" onclick="checkLogin(event)">Thanh Toán</button>
+                <button type="submit" class="btn btn-success" onclick="checkLogin(event)">Đặt hàng</button>
             </div>
         </div>
     </form>

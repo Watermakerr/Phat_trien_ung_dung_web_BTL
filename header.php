@@ -45,7 +45,7 @@
                 <a href="viewcart.php" class="nav-link text-white">Giỏ hàng</a>
             </li>
         </ul>
-        <ul class="navbar-nav h-100">
+        <ul class="navbar-nav h-100 default-nav">
             <?php
             session_start();
             if (!isset($_SESSION['username'])) {
@@ -60,7 +60,7 @@
             } else {
             ?>
                 <li class="nav-item d-flex align-items-center">
-                    <a href="" class="nav-link text-white pointer-default"><?php echo $_SESSION['username'] ?></a>
+                    <a href="" class="nav-link text-white" onclick="return false"><?php echo $_SESSION['username'] ?></a>
                     <ul class="subnav p-0">
                         <li class="nav-item d-flex align-items-center">
                             <a href="order.php" class="nav-link text-dark">Đơn hàng</a>

@@ -78,19 +78,22 @@ if ($result->num_rows <= 0) {
             </div>
             <div class="form-group mt-3">
                 <label for="description">Mô tả</label>
-                <input type="text" name="description" class="form-control" value="<?php echo $row['description'] ?>">
-            </div>
-            <div class="form-group mt-3">
-                <label for="image">Hình ảnh</label>
-                <input type="file" id="image" name="image"><br>
-                <span>Ảnh cũ:</span>
-                <img src="../asset/image/<?php echo $image; ?>" alt="Old image" style="width: 100px; height: auto;">
-            </div>
+                <textarea name="description" id="description" class="form-control" rows="5"><?php echo htmlspecialchars($row['description']); ?></textarea>
+                <div class="form-group mt-3">
+                    <label for="image">Hình ảnh</label>
+                    <input type="file" id="image" name="image"><br>
+                    <span>Ảnh cũ:</span>
+                    <img src="../asset/image/<?php echo $image; ?>" alt="Old image" style="width: 100px; height: auto;">
+                </div>
 
-            <input type="submit" name="submit" value="Update" class="btn btn-success">
+                <input type="submit" name="submit" value="Update" class="btn btn-success">
         </form>
     </div>
 </div>
+<script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('description');
+</script>
 <?php
 require 'footer.php';
 ?>

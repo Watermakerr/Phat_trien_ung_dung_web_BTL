@@ -84,7 +84,7 @@ if (isset($_GET['id'])) {
         var message = document.querySelector('input[name="message"]').value;
         if (message.length < 20) {
             alert('Bình luận phải có ít nhất 20 kí tự');
-            event.preventDefault(); // Prevent the form from submitting
+            event.preventDefault();
         }
     });
 </script>
