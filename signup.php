@@ -79,17 +79,17 @@ if (isset($_POST['submit'])) {
             } else {
                 submitButton.disabled = false;
             }
-            const passwordAlert = document.querySelector('.password-alert');
+            const rePasswordAlert = document.querySelector('.password-alert');
             if (password.value != rePassword.value) {
-                if (!passwordAlert) {
+                if (!rePasswordAlert) {
                     var text = document.createElement('p');
                     text.innerHTML = "Mật khẩu không khớp";
                     text.classList.add('alert', 'alert-danger', 'mt-2', 'password-alert');
                     rePassword.parentNode.appendChild(text);
                 }
                 submitButton.disabled = true;
-            } else if (passwordAlert) {
-                passwordAlert.remove();
+            } else if (rePasswordAlert) {
+                rePasswordAlert.remove();
             }
             const usernameAlert = document.querySelector('.username-alert');
             if (username.value.length < 5) {
@@ -103,6 +103,19 @@ if (isset($_POST['submit'])) {
             } else if (usernameAlert) {
                 usernameAlert.remove();
             }
+            const passwordAlert = document.querySelector('.password-alert');
+            if (password.value.length < 5) {
+                if (!passwordAlert) {
+                    var text = document.createElement('p');
+                    text.innerHTML = "Mật khẩu phải có ít nhất 5 ký tự";
+                    text.classList.add('alert', 'alert-danger', 'mt-2', 'password-alert');
+                    password.parentNode.appendChild(text);
+                }
+                submitButton.disabled = true;
+            } else if (passwordAlert) {
+                passwordAlert.remove();
+            }
+            
         }
         fullname.addEventListener('input', checkInput);
         username.addEventListener('input', checkInput);
