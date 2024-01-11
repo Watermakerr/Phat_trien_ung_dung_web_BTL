@@ -29,9 +29,19 @@ $result = $conn->query($sql);
 if ($result === false) {
     die("Error: " . $conn->error);
 }
+$total_sql = "SELECT COUNT(*) as total FROM `products`";
+
+if (isset($_GET['category'])) {
+    $category = $_GET['category'];
+    $total_sql .= " WHERE category_id = $category";
+} elseif (isset($_GET['keyword'])) {
+    $keyword = trim($_GET['keyword']);
+    $total_sql .= " WHERE name LIKE '%$keyword%'";
+}
 
 $total_result = $conn->query("SELECT COUNT(*) as total FROM `products`");
 $total_row = $total_result->fetch_assoc();
+$total_count = $total_row['total'];
 $total_pages = ceil($total_row['total'] / $limit);
 ?>
 
@@ -51,7 +61,7 @@ $total_pages = ceil($total_row['total'] / $limit);
                 ?>
             </h2>
             <h4 class="text-center text-info">
-                <?php echo "Tổng số sản phẩm: " . $result->num_rows; ?>
+                <?php echo "Tổng số sản phẩm: " . $total_count; ?>
             </h4>
         </div>
     </div>
