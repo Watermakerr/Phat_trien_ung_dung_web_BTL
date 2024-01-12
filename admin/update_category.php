@@ -1,7 +1,10 @@
 <?php
 require 'header.php';
+
+$id = isset($_POST['id']) ? $_POST['id'] : $_GET['id'];
+
 if (isset($_POST['submit'])) {
-    $name = $_POST['message'];
+    $name = $_POST['name'];
     $status = $_POST['status'];
     $sql = "UPDATE `categories` SET `name`='$name', `status`='$status' WHERE `category_id` = '$id'";
     if ($conn->query($sql) === TRUE) {
@@ -11,7 +14,6 @@ if (isset($_POST['submit'])) {
         echo "<script>alert('Có lỗi xảy ra')</script>";
     }
 } else {
-    $id = $_GET['id'];
     $sql = "SELECT * FROM `categories` WHERE `category_id` = '$id'";
     $result = $conn->query($sql);
     if ($result->num_rows <= 0) {
@@ -27,7 +29,7 @@ if (isset($_POST['submit'])) {
             <h1 class="text-center">Update category</h1>
             <div class="form-group">
                 <label for="">Tên danh mục</label>
-                <input type="text " name="message" class="form-control" value="<?php echo $row['name']; ?> ">
+                <input type="text " name="name" class="form-control" value="<?php echo $row['name']; ?> ">
             </div>
             <div class="form-group">
                 <label for="">Status</label>
@@ -46,7 +48,7 @@ if (isset($_POST['submit'])) {
 </div>
 <script>
     document.querySelector("form").addEventListener("submit", function(e) {
-        var name = document.querySelector("input[name='message']").value;
+        var name = document.querySelector("input[name='name']").value;
         var status = document.querySelector("input[name='status']:checked");
 
         if (name === "") {

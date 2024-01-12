@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 20, 2023 at 03:27 PM
+-- Generation Time: Jan 12, 2024 at 04:58 AM
 -- Server version: 5.7.24
 -- PHP Version: 8.0.1
 
@@ -40,8 +40,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`category_id`, `name`, `status`, `create_at`, `update_at`) VALUES
-(1, 'Nokia', 'active', '2023-12-15 07:43:56', '2023-12-15 07:43:56'),
-(2, 'Apple', 'active', '2023-12-15 08:23:00', '2023-12-15 08:23:00');
+(3, 'Apple', 'active', '2024-01-06 07:14:50', '2024-01-06 07:14:50'),
+(4, 'Oppo  ', 'active', '2024-01-12 03:43:47', '2024-01-12 03:48:24'),
+(5, 'Samsung   ', 'active', '2024-01-12 03:49:18', '2024-01-12 04:34:33');
 
 -- --------------------------------------------------------
 
@@ -58,13 +59,6 @@ CREATE TABLE `feedbacks` (
   `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `feedbacks`
---
-
-INSERT INTO `feedbacks` (`feedback_id`, `message`, `user_id`, `product_id`, `create_at`, `update_at`) VALUES
-(1, 'Sản phẩm rất tốt, tôi khuyên không nên mua', 9, 29, '2023-12-20 15:26:44', '2023-12-20 15:26:44');
-
 -- --------------------------------------------------------
 
 --
@@ -75,9 +69,18 @@ CREATE TABLE `orders` (
   `order_id` int(11) NOT NULL,
   `user_id` int(11) DEFAULT NULL,
   `create_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `status` int(11) NOT NULL DEFAULT '0' COMMENT '0. Đơn hàng đang tiếp nhận 1. Đóng gói 2. Đang giao 3. Giao hàng thành công 4. Hủy'
+  `update_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `status` int(11) NOT NULL DEFAULT '0' COMMENT '0. Đang chờ xác nhận 1. Đã xác nhận 2. Đang giao hàng 3. Đã giao hàng 4. Đã huỷ'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `user_id`, `create_at`, `update_at`, `status`) VALUES
+(6, 16, '2024-01-07 08:58:39', '2024-01-07 08:59:07', 4),
+(7, 16, '2024-01-07 08:58:45', '2024-01-07 08:59:11', 1),
+(8, 16, '2024-01-07 08:58:53', '2024-01-07 08:58:53', 0);
 
 -- --------------------------------------------------------
 
@@ -113,25 +116,24 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `name`, `image`, `category_id`, `price`, `description`, `create_at`, `update_at`) VALUES
-(11, 'phone 32', '5ce1c93d3ca9b4a2425d369b59d05fee.jpg', 2, 123, '111', '2023-12-20 09:39:44', '2023-12-20 09:39:44'),
-(12, 'ádasd', '359362701_665572625615117_1068142181357036148_n-1689827198-684-width1024height1024.jpg', 2, 23143, '234234', '2023-12-20 09:54:59', '2023-12-20 09:54:59'),
-(13, 'iphone 1', 'iphone-x.png', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:21:42', '2023-12-20 15:21:42'),
-(14, 'iphone 2', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:21:55', '2023-12-20 15:21:55'),
-(15, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:22:11', '2023-12-20 15:22:11'),
-(16, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:22:14', '2023-12-20 15:22:14'),
-(17, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:22:17', '2023-12-20 15:22:17'),
-(18, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:22:20', '2023-12-20 15:22:20'),
-(19, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:22:23', '2023-12-20 15:22:23'),
-(20, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:03', '2023-12-20 15:23:03'),
-(21, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:06', '2023-12-20 15:23:06'),
-(22, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:09', '2023-12-20 15:23:09'),
-(23, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:11', '2023-12-20 15:23:11'),
-(24, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:13', '2023-12-20 15:23:13'),
-(25, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:14', '2023-12-20 15:23:14'),
-(26, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:16', '2023-12-20 15:23:16'),
-(27, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:18', '2023-12-20 15:23:18'),
-(28, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:19', '2023-12-20 15:23:19'),
-(29, 'iphone 3', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 2, 1000000, 'Hàng chính hãng', '2023-12-20 15:23:21', '2023-12-20 15:23:21');
+(11, 'phone 32', '5ce1c93d3ca9b4a2425d369b59d05fee.jpg', 3, 1000000000, '<p><strong>Thương hiệu</strong>: Apple</p>\r\n\r\n<p><strong>Bộ nhớ</strong>: 64GB</p>\r\n\r\n<p><strong>Vi xử l&yacute;</strong>: A5</p>\r\n\r\n<p><strong>Ram</strong>: 8GB</p>\r\n', '2024-01-08 15:30:37', '2024-01-12 03:36:36'),
+(12, 'iphone 5', '8-plus-1616692326040.jpg', 3, 4000000, '<p><strong>Thương hiệu</strong>: Apple</p>\r\n\r\n<p><strong>Bộ nhớ</strong>: 8GB</p>\r\n\r\n<p><strong>Vi xử l&yacute;</strong>: 5</p>\r\n\r\n<p><strong>Ram</strong>: 8GB</p>\r\n', '2024-01-08 15:36:42', '2024-01-12 03:41:46'),
+(13, 'phone 13 promax', '359362701_665572625615117_1068142181357036148_n-1689827198-684-width1024height1024.jpg', 3, 16000000, '<p><strong>Thương hiệu</strong>: Apple</p>\r\n\r\n<p><strong>Bộ nhớ</strong>: 64GB</p>\r\n\r\n<p><strong>Vi xử l&yacute;</strong>: A5</p>\r\n\r\n<p><strong>Ram</strong>: 8GB</p>\r\n', '2024-01-11 13:29:19', '2024-01-12 03:41:06'),
+(14, 'phone 14 promax', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 3, 19000000, '<p><strong>Thương hiệu</strong>: Apple</p>\r\n\r\n<p><strong>Bộ nhớ</strong>: 64GB</p>\r\n\r\n<p><strong>Vi xử l&yacute;</strong>: A5</p>\r\n\r\n<p><strong>Ram</strong>: 8GB</p>\r\n', '2024-01-11 13:29:25', '2024-01-12 03:40:32'),
+(15, 'phone 11', 'apple-iphone-11-pro-max-1-sim-256gb-cu-99-ll-11688962088.jpg', 3, 17000000, '<p><strong>Thương hiệu</strong>: Apple</p>\r\n\r\n<p><strong>Bộ nhớ</strong>: 64GB</p>\r\n\r\n<p><strong>Vi xử l&yacute;</strong>: A5</p>\r\n\r\n<p><strong>Ram</strong>: 8GB</p>\r\n', '2024-01-11 13:29:27', '2024-01-12 03:40:04'),
+(16, 'iphone X', '1691807161_10055895-dien-thoai-samsung-galaxy-z-fold-5-5g-12g.jpg', 3, 13000000, '<p><strong>Thương hiệu</strong>: Apple</p>\r\n\r\n<p><strong>Bộ nhớ</strong>: 64GB</p>\r\n\r\n<p><strong>Vi xử l&yacute;</strong>: A5</p>\r\n\r\n<p><strong>Ram</strong>: 8GB</p>\r\n', '2024-01-11 13:29:28', '2024-01-12 03:39:38'),
+(17, 'phone 6', '6529654cv13d.jpg', 3, 1, '<p><strong>Thương hiệu</strong>: Apple</p>\r\n\r\n<p><strong>Bộ nhớ</strong>: 64GB</p>\r\n\r\n<p><strong>Vi xử l&yacute;</strong>: A5</p>\r\n\r\n<p><strong>Ram</strong>: 8GB</p>\r\n', '2024-01-11 13:29:29', '2024-01-12 03:38:52'),
+(18, 'phone 8', '359362701_665572625615117_1068142181357036148_n-1689827198-684-width1024height1024.jpg', 3, 10000000, '<p><strong>Thương hiệu</strong>: Apple</p>\r\n\r\n<p><strong>Bộ nhớ</strong>: 32GB</p>\r\n\r\n<p><strong>Vi xử l&yacute;</strong>: A5</p>\r\n\r\n<p><strong>Ram</strong>: 8GB</p>\r\n', '2024-01-11 13:29:31', '2024-01-12 03:39:04'),
+(29, 'iphone 12', '6529654cv13d.jpg', 3, 4000000, '<p><strong>Thương hiệu</strong>: Apple</p>\r\n\r\n<p><strong>Bộ nhớ</strong>: 64GB</p>\r\n\r\n<p><strong>Vi xử l&yacute;</strong>: A5</p>\r\n\r\n<p><strong>Ram</strong>: 8GB</p>\r\n', '2024-01-12 03:42:29', '2024-01-12 03:42:29'),
+(30, 'iphone 12', 'badmin.jpg', 3, 4000000, '<p><strong>Thương hiệu</strong>: Apple</p>\r\n\r\n<p><strong>Bộ nhớ</strong>: 64GB</p>\r\n\r\n<p><strong>Vi xử l&yacute;</strong>: A5</p>\r\n\r\n<p><strong>Ram</strong>: 8GB</p>\r\n', '2024-01-12 03:43:02', '2024-01-12 03:43:02'),
+(31, 'iphone 16', '6529654cv13d.jpg', 3, 4000000, '<p><strong>Thương hiệu</strong>: Apple</p>\r\n\r\n<p><strong>Bộ nhớ</strong>: 64GB</p>\r\n\r\n<p><strong>Vi xử l&yacute;</strong>: A5</p>\r\n\r\n<p><strong>Ram</strong>: 8GB</p>\r\n', '2024-01-12 03:43:33', '2024-01-12 03:43:33'),
+(32, 'Oppo A32', '5ce1c93d3ca9b4a2425d369b59d05fee.jpg', 3, 7000000, '<p><strong>Thương hiệu</strong>: Oppo</p>\r\n\r\n<p><strong>Bộ nhớ</strong>: 64GB</p>\r\n\r\n<p><strong>Vi xử l&yacute;</strong>: A5</p>\r\n\r\n<p><strong>Ram</strong>: 8GB</p>\r\n', '2024-01-12 03:50:40', '2024-01-12 03:51:43'),
+(33, 'Oppo A45', '1691807161_10055895-dien-thoai-samsung-galaxy-z-fold-5-5g-12g.jpg', 4, 5000000, '<p><strong>Thương hiệu</strong>: Oppo</p>\r\n\r\n<p><strong>Bộ nhớ</strong>: 64GB</p>\r\n\r\n<p><strong>Vi xử l&yacute;</strong>: A5</p>\r\n\r\n<p><strong>Ram</strong>: 8GB</p>\r\n', '2024-01-12 03:52:28', '2024-01-12 03:52:28'),
+(34, 'Oppo A46', '6529654cv13d.jpg', 4, 5000000, '<p><strong>Thương hiệu</strong>: Oppo</p>\r\n\r\n<p><strong>Bộ nhớ</strong>: 64GB</p>\r\n\r\n<p><strong>Vi xử l&yacute;</strong>: A5</p>\r\n\r\n<p><strong>Ram</strong>: 8GB</p>\r\n', '2024-01-12 03:53:19', '2024-01-12 03:53:19'),
+(35, 'Oppo S12', 'a93-8gb128gb_main_618_1020.png.webp', 4, 5000000, '<p><strong>Thương hiệu</strong>: Oppo</p>\r\n\r\n<p><strong>Bộ nhớ</strong>: 64GB</p>\r\n\r\n<p><strong>Vi xử l&yacute;</strong>: A5</p>\r\n\r\n<p><strong>Ram</strong>: 8GB</p>\r\n', '2024-01-12 03:53:38', '2024-01-12 03:53:38'),
+(36, 'Oppo S4', 'apple-iphone-11-pro-max-1-sim-256gb-cu-99-ll-11688962088.jpg', 4, 5000000, '<p><strong>Thương hiệu</strong>: Oppo</p>\r\n\r\n<p><strong>Bộ nhớ</strong>: 64GB</p>\r\n\r\n<p><strong>Vi xử l&yacute;</strong>: A5</p>\r\n\r\n<p><strong>Ram</strong>: 8GB</p>\r\n', '2024-01-12 03:53:57', '2024-01-12 03:53:57'),
+(37, 'Samsung S12', '600_samsung_galaxy_s22_chinh_hang_den_1.webp', 5, 12000000, '<p><strong>Thương hiệu</strong>: Samsung</p>\r\n\r\n<p><strong>Bộ nhớ</strong>: 64GB</p>\r\n\r\n<p><strong>Vi xử l&yacute;</strong>: A5</p>\r\n\r\n<p><strong>Ram</strong>: 8GB</p>\r\n', '2024-01-12 03:55:28', '2024-01-12 03:55:28'),
+(38, 'Samsung S12', '1684210858832-ly-do-nen-lua-chon-iphone-11-cu-o-thoi-diem-hien-tai.jpg', 4, 12000000, '<p><strong>Thương hiệu</strong>: Samsung</p>\r\n\r\n<p><strong>Bộ nhớ</strong>: 64GB</p>\r\n\r\n<p><strong>Vi xử l&yacute;</strong>: A5</p>\r\n\r\n<p><strong>Ram</strong>: 8GB</p>\r\n', '2024-01-12 03:56:24', '2024-01-12 03:56:24');
 
 -- --------------------------------------------------------
 
@@ -174,11 +176,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `fullname`, `email`, `password`, `role_id`, `create_at`, `update_at`) VALUES
-(5, '1', 'Trần Quốc Chính', 'vuibigboy@gmail.com', '1', 1, '2023-12-15 07:34:42', '2023-12-15 07:52:09'),
-(6, 'vuibigboy', 'Trần Quốc Chính', 'vuibigboy@gmail.com', '1', 2, '2023-12-15 07:35:17', '2023-12-15 07:35:17'),
-(7, 'aa', 'Trần Quốc Chính', 'vuibigboy@gmail.com', '1', 2, '2023-12-15 09:10:02', '2023-12-15 09:10:02'),
-(8, '2', '1', 'vuibigboy@gmail.com', '1', 2, '2023-12-15 13:10:34', '2023-12-15 13:10:34'),
-(9, 'chinh', 'Trần Quốc Chính', 'vuibigboy@gmail.com', '$2y$10$DnB0aKlajFKc7DNPlZV3n.jqBpjdU5o.WFol2kZPIHFmPj6t9ZyBW', 1, '2023-12-16 10:07:31', '2023-12-20 08:23:39');
+(16, 'admin', 'admin 2', 'tranchonh2000@gmail.com', '$2y$10$Z3UR2K6BJVpKfGdghcT4keRkq4gWjdzu2T6Vyh.SeZA/2qRF8a7tG', 1, '2024-01-07 08:57:57', '2024-01-07 08:58:18');
 
 --
 -- Indexes for dumped tables
@@ -230,6 +228,7 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `username` (`username`),
   ADD KEY `role_id` (`role_id`);
 
 --
@@ -240,25 +239,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `feedbacks`
 --
 ALTER TABLE `feedbacks`
-  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `feedback_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -270,7 +269,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables
@@ -293,8 +292,8 @@ ALTER TABLE `orders`
 -- Constraints for table `order_details`
 --
 ALTER TABLE `order_details`
-  ADD CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`),
-  ADD CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`);
+  ADD CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`product_id`) REFERENCES `products` (`product_id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `order_details_ibfk_2` FOREIGN KEY (`order_id`) REFERENCES `orders` (`order_id`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `products`
